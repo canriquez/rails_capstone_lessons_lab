@@ -10,16 +10,15 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 
 
 $font-url: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600&display=swap');
-//@import "semantic-ui";
 
-@import "font-awesome";
 
 // Color setup
 $main: #3778c2;
@@ -34,7 +33,7 @@ body {
 //**       NAVBAR         ***
 //***************************
 
-.navbar {
+.app-navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,8 +60,8 @@ body {
 }
 
 .header-burger>span {
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 6px;
+    margin-bottom: 6px;
 }
 
 .header-burger>span,
@@ -70,8 +69,8 @@ body {
 .header-burger::after {
     content: "";
     display: block;
-    width: 24px;
-    height: 4px;
+    width: 30px;
+    height: 3px;
     background-color: #FFF;
     margin-left: auto;
     margin-right: auto;

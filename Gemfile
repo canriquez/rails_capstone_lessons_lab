@@ -15,8 +15,9 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
-#I will use semantic UI
-gem 'semantic-ui-sass', '~> 2.4', '>= 2.4.2.0'
+#I will use bootstrap
+gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
+gem 'sassc-rails', '>= 2.1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'gravatar_image_tag', '~> 1.2'
