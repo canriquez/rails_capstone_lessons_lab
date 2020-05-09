@@ -15,6 +15,10 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
+#I will use semantic UI
+gem 'semantic-ui-sass', '~> 2.4', '>= 2.4.2.0'
+gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
+
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'spring'
@@ -34,6 +38,8 @@ group :test do
 	gem 'capybara', '~> 3.32', '>= 3.32.1'
 end
 
-
+group :production do
+  gem 'pg', '0.20.0'
+end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
