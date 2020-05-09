@@ -14,5 +14,65 @@
  *= require_self
  */
 
-$font-url:  url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600&display=swap');
-@import "semantic-ui";
+
+
+$font-url: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600&display=swap');
+//@import "semantic-ui";
+
+@import "font-awesome";
+
+// Color setup
+$main: #3778c2;
+$second: #5fb523;
+$text: #434b54;
+
+body {
+    background: $main;
+}
+
+//***************************
+//**       NAVBAR         ***
+//***************************
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    font-family: Montserrat;
+    font-size: 1.5em;
+    height: 60px;
+    background: $main;
+    color: #fff;
+    position: relative;
+
+    #app-title {
+        font-family: Montserrat;
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+}
+
+// Burger icon
+
+.header-burger {
+    width: 60px;
+    cursor: pointer;
+}
+
+.header-burger>span {
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+.header-burger>span,
+.header-burger::before,
+.header-burger::after {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 4px;
+    background-color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+}

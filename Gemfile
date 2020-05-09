@@ -20,6 +20,7 @@ gem 'semantic-ui-sass', '~> 2.4', '>= 2.4.2.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'gravatar_image_tag', '~> 1.2'
+gem 'simple_form', '~> 5.0', '>= 5.0.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
