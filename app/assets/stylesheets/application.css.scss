@@ -12,7 +12,6 @@
  *
  */
 
-@import "bootstrap-sprockets";
 @import "bootstrap";
 
 
@@ -27,6 +26,7 @@ $text: #434b54;
 
 body {
     //background: $main;
+    font-family: Montserrat;
 }
 
 //***************************
@@ -74,4 +74,20 @@ body {
     background-color: #FFF;
     margin-left: auto;
     margin-right: auto;
+}
+
+//Toggle Icons
+
+.toggle {
+    width: 40px
+}
+
+// Course show view
+
+.course_delivery {
+    li {
+        font-weight: 200;
+        font-size: 0.8rem;
+        align-items: center;
+    }
 }

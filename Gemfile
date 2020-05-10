@@ -16,12 +16,12 @@ gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # I will use bootstrap
-gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
-gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 gem 'gravatar_image_tag', '~> 1.2'
+gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
+gem 'inline_svg'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
