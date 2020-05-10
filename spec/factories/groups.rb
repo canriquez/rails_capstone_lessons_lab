@@ -1,12 +1,13 @@
 FactoryBot.define do
   factory :group do
-    name { "MyString" }
-    description { "MyText" }
-    duration { 1 }
+    sequence(:name) { |n| "course #{n}" }
+    description { "yes this is a course description" }
+    duration { 30 }
     price { "9.99" }
-    online { "MyString" }
-    presencial { "MyString" }
+    online { true }
+    presencial { true }
     classroom { false }
-    cover_image { "MyString" }
+    starting {"22/2/22"}
+    cover_image { "my file" }
   end
 end

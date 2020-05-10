@@ -1,31 +1,21 @@
 require 'rails_helper'
+require_relative '../support/new_group_form_handler'
 
-feature 'create new course' do
-  scenario 'create course with valid data' do
-    visit('/groups')
-    click_on('Add New Course')
-
-    fill_in('Course Name', with: 'Course 1')
-    fill_in('Description', with: 'this is a dummy description for testing purposes only')
-    select('45', from: 'Duration' )
-    fill_in('Price', with: 'Price')
-    check('Online Session')
-    check('Presencial Session')
-    check('Classroom Ready')
-    fill_in('Starting from', with:'05/08/2020')
-    attach_file('Course Image', "#{Rails.root}/spec/fixtures/ielts_cover_image.jpeg")
-    click_on('Save Course')
-
-    expect(page).to have_content('Course has been created')
-    expect(Group.last.name).to eq('Course 1')
-  end
+feature 'create new group/course' do
+    let(:new_group_form) { NewGroupForm.new }
+  
+    scenario 'create course with valid data' do
+        new_group_form.visit_page.fill_in_with(
+            'name': 'Cambridge C1').submit
+        expect(page).to have_content('Course has been created')
+        expect(Group.last.name).to eq('Cambridge C1')
+    end
 
   scenario 'failing to create achievement with invalid data' do
-    visit('/groups')
-    click_on('Add New Course')
+    new_group_form.visit_page.fill_in_with(
+        name: nil ).submit
 
-    click_on('Save Course')
     expect(page).to have_content("can't be blank")
   end
-  
+
 end
