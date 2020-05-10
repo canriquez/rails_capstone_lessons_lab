@@ -1,0 +1,12 @@
+<%= simple_form_for  @group do |f| %>
+    <%= f.input :name, label: "Course Name"%>
+    <%= f.input :description, label: "Description"%>
+    <%= f.input :duration, collection: Hash[session_duration_options] %> 
+    <%= f.input :price, label: "Price" %>
+    <%= f.input :online, label: "Online Session" %>
+    <%= f.input :presencial, label: "Presencial Session" %>
+    <%= f.input :classroom, label: "Classroom Ready" %>
+    <%= f.input :starting, label: "Starting from" %>
+    <%= f.input :cover_image, label: "Course Image", as: :file %>
+    <%= f.submit 'Save Course', class: 'btn btn-primary'%>
+<% end %>
