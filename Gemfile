@@ -21,7 +21,6 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
-gem 'inline_svg'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -29,8 +28,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
-  gem 'guard', '~> 2.16', '>= 2.16.2'
-  gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
 end
 
 group :development do
@@ -41,6 +38,7 @@ end
 
 group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.1'
+  gem 'rails-controller-testing'
 end
 
 group :production do
