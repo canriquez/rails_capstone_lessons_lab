@@ -29,6 +29,8 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
+  gem 'guard', '~> 2.16', '>= 2.16.2'
+  gem 'guard-livereload', '~> 2.5', '>= 2.5.2', require: false
 end
 
 group :development do

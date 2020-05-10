@@ -14,9 +14,27 @@
 
 @import "bootstrap";
 
+//***************************
+//**      FONTS           ***
+//***************************
 
+//$font-url: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600&display=swap');
 
-$font-url: url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600&display=swap');
+@font-face {
+    font-family: 'ProximaThin';
+    src: url('proxima/ProximaNovaThin.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'ProximaReg';
+    src: url('proxima/ProximaNovaRegular.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'ProximaBold';
+    src: url('proxima/ProximaNovaBold.otf') format('opentype');
+}
+
 
 
 // Color setup
@@ -26,7 +44,7 @@ $text: #434b54;
 
 body {
     //background: $main;
-    font-family: Montserrat;
+    font-family: ProximaReg;
 }
 
 //***************************
@@ -46,7 +64,7 @@ body {
     position: relative;
 
     #app-title {
-        font-family: Montserrat;
+        font-family: ProximaBold;
         font-weight: 600;
         font-size: 1.5em;
     }
@@ -84,10 +102,54 @@ body {
 
 // Course show view
 
-.course_delivery {
-    li {
+
+.card-header {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-family: ProximaBold;
+    font-size: 1rem;
+}
+
+.card-body {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.course-description {
+    .card-text {
+        padding-top: 2px;
+        padding-bottom: 2px;
         font-weight: 200;
-        font-size: 0.8rem;
+        font-size: 0.9rem;
+    }
+}
+
+.course-session {
+    div {
+        font-family: ProximaBold;
+        font-size: 1rem;
+    }
+
+    li {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-weight: 400;
+        font-size: 0.9rem;
+        align-items: center;
+    }
+}
+
+.course-delivery {
+    div {
+        font-family: ProximaBold;
+        font-size: 1rem;
+    }
+
+    li {
+        padding-top: 2px;
+        padding-bottom: 2px;
+        font-weight: 400;
+        font-size: 0.9rem;
         align-items: center;
     }
 }
