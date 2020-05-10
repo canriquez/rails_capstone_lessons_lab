@@ -2,7 +2,7 @@ require 'rails_helper'
 require_relative '../support/edit_group_form_handler'
 
 feature 'Edit existing and enabled group/course' do
-=begin   
+
   let(:edit_group_form) { EditGroupForm.new }
   let(:enabled_group_course) { FactoryBot.create(:group_enabled) }
 
@@ -13,7 +13,7 @@ feature 'Edit existing and enabled group/course' do
     expect(page).to have_content('Course has been updated correctly')
     expect(Group.last.name).to eq('Cambridge C2 edition')
   end 
-=end
+
 
 =begin   
 scenario 'failing to edit achievement with invalid data' do

@@ -1,1 +1,18 @@
 <%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' %>
+<%= link_to 'Edit Course', new_group_path, class: 'btn btn-primary' %>
+
+<div class="card mb-3" style="max-width: 28rem;">
+  <div class="card-header bg-transparent">
+    <div class="media">
+        <%= image_tag("ielts_cover_image.jpeg", size: "56x30", alt: "Edit Entry") %>
+        <div class="media-body">
+            <h5 class="mt-0"><%= @group.name %></h5>
+        </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Description</h5>
+    <p class="card-text"><%= @group.description %></p>
+  </div>
+  <div class="card-footer bg-transparent">Footer</div>
+</div>
