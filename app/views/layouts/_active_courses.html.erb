@@ -1,5 +1,5 @@
 <% @group.each do |course| %>
-  <div class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
+  <div id="course-<%= course.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
     <div class="card-header bg-transparent">
       <div class="media d-flex justify-content-between">
           <div class="header-left d-flex">
@@ -39,10 +39,11 @@
 
         <button type="button" class="shadows icon-btn btn">
 
-        <%= link_to group_path(course), method: :delete do %>
+        <%= link_to confirm_destroy_group_path(course), data: { remote: true }, class: "delete" do %>
           <%= svg('trash_can') %>
           <% end %>
         </button>
+
       </div>
     </div>
   </div>

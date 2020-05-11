@@ -1,0 +1,10 @@
+$('#confirmation').html("<%= j (render 'layouts/conf_del') %>");
+$('#confirmation').css("display", "block");
+$('#confirm_deletion').modal('show');
+$('#confirm_deletion').slideDown(350);
+
+ $("#delete-action").click(function()
+{
+    $('#course-<%=@course.id%>').hide(500)
+    $('#confirm_deletion').modal('hide');
+});

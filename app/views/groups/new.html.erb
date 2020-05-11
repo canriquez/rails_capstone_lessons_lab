@@ -8,5 +8,5 @@
     <%= f.input :enabled, label: "Enable Course" %>
     <%= f.input :starting, label: "Starting from" %>
     <%= f.input :cover_image, label: "Course Image", as: :file %>
-    <%= f.submit 'Save Course', class: 'btn btn-primary'%>
+    <%= f.submit 'Save Course', class: 'btn btn-primary', data: { "disable-with": "Saving..." } %>
 <% end %>

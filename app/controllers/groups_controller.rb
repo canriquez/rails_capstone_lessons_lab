@@ -39,9 +39,22 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    @course = Group.find(params[:id])
     Group.destroy(params[:id])
-    redirect_to groups_path
+    
+    respond_to do |format|
+      #format.js 
+      format.html {redirect_to groups_path, notice: "Course #{@course.name } was  eliminated." }
+    end
   end
+
+  def confirm_destroy
+    @course = Group.find(params[:id])
+    respond_to do |format|
+      format.js 
+    end
+  end
+
 
 
   private
