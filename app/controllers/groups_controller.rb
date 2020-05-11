@@ -1,7 +1,7 @@
 class GroupsController < ApplicationController
   
   def index
-    @group = Group.enabled.last
+    @group = Group.enabled
   end
 
   def new

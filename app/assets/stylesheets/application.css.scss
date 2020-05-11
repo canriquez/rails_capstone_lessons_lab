@@ -70,6 +70,33 @@ body {
     }
 }
 
+// Personalised badges
+
+.badge-info {
+    background-color: $second;
+    padding: 8px;
+}
+
+// Pesonalised buttons
+.more-info-btn {
+    color: #fff;
+    background-color: $main;
+    border-color: $main;
+    padding: 1px 4px;
+}
+
+.icon-btn {
+    padding: 1px 6px;
+    -webkit-box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
+    box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
+
+    svg {
+        fill: $text;
+        margin-top: 6px;
+    }
+}
+
 // Burger icon
 
 .header-burger {
