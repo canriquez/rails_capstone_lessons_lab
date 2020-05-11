@@ -4,7 +4,7 @@ class NewGroupForm
   def visit_page
     visit('/groups')
     click_on('Add New Course')
-    self # so we can chain our mesagges
+    self
   end
 
   def fill_in_with(params = {})

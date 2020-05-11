@@ -16,4 +16,6 @@ module ApplicationHelper
     value ? svg("on") : svg("off")
   end
 
+
+
 end

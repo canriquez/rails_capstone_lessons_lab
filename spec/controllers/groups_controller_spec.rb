@@ -3,13 +3,13 @@ require 'rails_helper'
 describe GroupsController do
 
     describe "GET course index" do
+        let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
+        #let(:group_course_disabled) { FactoryBot.create(:group_disabled) }
         it "renders :index template" do
             get :index
             expect(response).to render_template(:index)
         end
         it "selects only 'enabled' courses in the index - any delivery info flag is true -" do
-            group_course_enabled = FactoryBot.create(:group_enabled)
-            group_course_disabled = FactoryBot.create(:group_disabled)
             get :index
             expect(assigns(:group)).to match_array([group_course_enabled])
 

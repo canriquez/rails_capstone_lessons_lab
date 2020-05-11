@@ -39,6 +39,7 @@ end
 group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.1'
   gem 'rails-controller-testing'
+  gem 'database_cleaner'
 end
 
 group :production do

@@ -31,12 +31,17 @@
       </div>
       <div class="ft-right">
 
-        <button type="button" class="shadows icon-btn btn">
+        <button value="edit" name="edit" type="button" class="edit shadows icon-btn btn">
+         <%= link_to edit_group_path(course) do %>
           <%= svg('edit') %>
+          <% end %>
         </button>
 
         <button type="button" class="shadows icon-btn btn">
+
+        <%= link_to group_path(course), method: :delete do %>
           <%= svg('trash_can') %>
+          <% end %>
         </button>
       </div>
     </div>

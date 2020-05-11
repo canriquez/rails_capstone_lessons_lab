@@ -8,6 +8,8 @@ FactoryBot.define do
     cover_image { 'my file' }
     online { true }
     presencial { true }
+    enabled { true }
+    
     factory :group_enabled do
       # privacy { Achievement.privacies[:public_access] }
       enabled { true }
