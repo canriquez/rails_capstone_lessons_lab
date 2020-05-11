@@ -39,8 +39,9 @@ class GroupsController < ApplicationController
   end
 
   def destroy
+    puts "WE GET TO DESTROY"
     @course = Group.find(params[:id])
-    Group.destroy(params[:id])
+    @course.destroy
     
     respond_to do |format|
       #format.js 
@@ -50,6 +51,7 @@ class GroupsController < ApplicationController
 
   def confirm_destroy
     @course = Group.find(params[:id])
+    p @course
     respond_to do |format|
       format.js 
     end

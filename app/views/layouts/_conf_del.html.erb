@@ -12,10 +12,13 @@
       </div>
       <div class="modal-footer">
         <button id="cancel-action" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel Action</button>
-        <button id="delete-action" type="button" class="btn btn-primary">
-        Delete Course
-        <%= link_to group_path(@course), method: :delete, data: { remote: true } %>
-        </button>
+        
+        <%= link_to group_path(@course), method: :delete, data: { remote: true } do %>
+            <button id="delete-action" type="button" class="btn btn-primary">
+            Delete Course Already!
+            </button>
+        <% end %>
+
       </div>
     </div>
   </div>
