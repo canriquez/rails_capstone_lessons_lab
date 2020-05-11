@@ -9,8 +9,8 @@ class CreateGroups < ActiveRecord::Migration[5.2]
       t.decimal :price, precision: 8, scale: 2
       t.boolean :online
       t.boolean :presencial
-      t.boolean :classroom
       t.string  :starting
+      t.boolean :enabled
       t.string :cover_image
 
       t.timestamps

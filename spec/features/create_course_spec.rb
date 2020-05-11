@@ -8,8 +8,9 @@ feature 'create new group/course' do
     new_group_form.visit_page.fill_in_with(
       'name': 'Cambridge C1'
     ).submit
-    expect(page).to have_content('Course has been created')
+    expect(page).to have_content('Cambridge C1')
     expect(Group.last.name).to eq('Cambridge C1')
+    expect(Group.last.enabled).to eq(true)
   end
 
   scenario 'failing to create achievement with invalid data' do

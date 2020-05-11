@@ -10,6 +10,7 @@ class Group < ApplicationRecord
   validates :starting, presence: true
   validates :cover_image, presence: true
 
-  scope :enabled, -> { where(online: true).or(where(presencial: true).where(classroom: true)) }
+  scope :enabled, -> { where(enabled: true) }
+  scope :disabled, -> { where(enabled: false) }
 
 end

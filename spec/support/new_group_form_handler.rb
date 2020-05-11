@@ -14,7 +14,7 @@ class NewGroupForm
     fill_in('Price', with: 'Price')
     check('Online Session')
     check('Presencial Session')
-    check('Classroom Ready')
+    check('Enable Course')
     fill_in('Starting from', with: '05/08/2020')
     attach_file('Course Image', "#{Rails.root}/spec/fixtures/ielts_cover_image.jpeg")
     self

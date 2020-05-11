@@ -19,8 +19,8 @@ ActiveRecord::Schema.define(version: 2020_05_09_222956) do
     t.decimal "price", precision: 8, scale: 2
     t.boolean "online"
     t.boolean "presencial"
-    t.boolean "classroom"
     t.string "starting"
+    t.boolean "enabled"
     t.string "cover_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

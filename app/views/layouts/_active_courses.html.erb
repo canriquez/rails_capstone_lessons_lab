@@ -1,0 +1,44 @@
+<% @group.each do |course| %>
+  <div class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
+    <div class="card-header bg-transparent">
+      <div class="media d-flex justify-content-between">
+          <div class="header-left d-flex">
+            <%= image_tag("ielts_cover_image.jpeg", size: "56x30", alt: "Edit Entry") %>
+            <div class="media-body">
+                <h5 class="mt-1 ml-4"><%= course.name %></h5>
+            </div>
+          </div>
+          <div class="header-right">
+            <small class="text-muted">Course started: <%= course.starting %></small>
+            <button type="button" class="course-on-btn shadows btn">
+              <%= svg('switch') %>
+            </button>
+          </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Course description</h5>
+      <p class="card-text"><%= course.description %></p>                                      
+    </div>
+    <div class="card-footer bg-transparent d-flex justify-content-between">
+      <div class="ft-left">
+        <button type="button" class="more-info-btn btn">
+          Lessons given <span class="badge badge-light">98</span>
+        </button>
+        <button type="button" class="more-info-btn btn">
+          Students enrolled <span class="badge badge-light">26</span>
+        </button>
+      </div>
+      <div class="ft-right">
+
+        <button type="button" class="shadows icon-btn btn">
+          <%= svg('edit') %>
+        </button>
+
+        <button type="button" class="shadows icon-btn btn">
+          <%= svg('trash_can') %>
+        </button>
+      </div>
+    </div>
+  </div>
+  <% end %>

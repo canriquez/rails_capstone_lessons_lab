@@ -48,6 +48,17 @@ body {
 }
 
 //***************************
+//**      GENERIC         ***
+//***************************
+
+.shadows {
+    -webkit-box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
+    -moz-box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
+    box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
+}
+
+
+//***************************
 //**       NAVBAR         ***
 //***************************
 
@@ -67,33 +78,6 @@ body {
         font-family: ProximaBold;
         font-weight: 600;
         font-size: 1.5em;
-    }
-}
-
-// Personalised badges
-
-.badge-info {
-    background-color: $second;
-    padding: 8px;
-}
-
-// Pesonalised buttons
-.more-info-btn {
-    color: #fff;
-    background-color: $main;
-    border-color: $main;
-    padding: 1px 4px;
-}
-
-.icon-btn {
-    padding: 1px 6px;
-    -webkit-box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
-    -moz-box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
-    box-shadow: 6px 7px 4px -4px rgba(0, 0, 0, 0.17);
-
-    svg {
-        fill: $text;
-        margin-top: 6px;
     }
 }
 
@@ -121,14 +105,62 @@ body {
     margin-right: auto;
 }
 
+//***************************************
+//**       COURSE CARDS INDEX         ***
+//***************************************
+
+
+// Personalised badges
+
+.badge-info {
+    background-color: $second;
+    padding: 8px;
+}
+
+// Pesonalised buttons
+.more-info-btn {
+    color: #fff;
+    background-color: $main;
+    border-color: $main;
+    padding: 1px 4px;
+}
+
+.icon-btn {
+    padding: 1px 6px;
+
+    svg {
+        fill: $text;
+        margin-top: 6px;
+    }
+}
+
+.card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.course-on-btn {
+    padding: 1px 6px;
+
+    svg {
+        fill: $second;
+        margin-top: 6px;
+    }
+}
+
+
+//***************************************
+//**      SINGLE COURSE VIEW          ***
+//***************************************
+
 //Toggle Icons
 
 .toggle {
     width: 40px
 }
 
-// Course show view
-
+//
 
 .card-header {
     padding-top: 4px;

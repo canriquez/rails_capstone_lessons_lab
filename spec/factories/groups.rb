@@ -6,18 +6,15 @@ FactoryBot.define do
     price { '9.99' }
     starting { '22/2/22' }
     cover_image { 'my file' }
-
+    online { true }
+    presencial { true }
     factory :group_enabled do
       # privacy { Achievement.privacies[:public_access] }
-      online { true }
-      presencial { true }
-      classroom { true }
+      enabled { true }
     end
 
     factory :group_disabled do
-      online { false }
-      presencial { false }
-      classroom { false }
+      enabled { false }
     end
 
   end

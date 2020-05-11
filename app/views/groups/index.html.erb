@@ -1,49 +1,19 @@
 <%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' %>
 <%= link_to 'Edit Course', new_group_path, class: 'btn btn-primary' %>
 
-<% @group.each do |course| %>
-  <div class="card mb-3" style="max-width: 38rem;">
-    <div class="card-header bg-transparent">
-      <div class="media d-flex justify-content-between">
-          <div class="header-left d-flex">
-            <%= image_tag("ielts_cover_image.jpeg", size: "56x30", alt: "Edit Entry") %>
-            <div class="media-body">
-                <h5 class="mt-1 ml-4"><%= course.name %></h5>
-            </div>
-          </div>
-          <div class="header-right">
-            <div class="badge badge-info" role="alert">
-              <span><%= course.starting %></span>
-            </div>
-            <button type="button" class="icon-btn btn">
-              <%= svg('switch') %>
-            </button>
-          </div>
-      </div>
-    </div>
-    <div class="card-body">
-      <h5 class="card-title">Course description</h5>
-      <p class="card-text"><%= course.description %></p>                                      
-    </div>
-    <div class="card-footer bg-transparent d-flex justify-content-between">
-      <div class="ft-left">
-        <button type="button" class="more-info-btn btn">
-          Lessons given <span class="badge badge-light">45</span>
-        </button>
-        <button type="button" class="more-info-btn btn">
-          Students enrolled <span class="badge badge-light">45</span>
-        </button>
-      </div>
-      <div class="ft-right">
 
-        <button type="button" class="icon-btn btn">
-          <%= svg('edit') %>
-        </button>
-
-        <button type="button" class="icon-btn btn">
-          <%= svg('trash_can') %>
-        </button>
-      </div>
-    </div>
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Active Courses</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Disabled Courses</a>
+      </li>
+    </ul>
   </div>
-  <% end %>
+  <div class="">
+    <%= render 'layouts/active_courses' %>
+  </div>
+</div>
