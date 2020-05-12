@@ -11,7 +11,6 @@ FactoryBot.define do
     enabled { true }
 
     factory :group_enabled do
-      # privacy { Achievement.privacies[:public_access] }
       enabled { true }
     end
 

@@ -3,7 +3,6 @@ require 'rails_helper'
 describe GroupsController do
   describe 'GET course index' do
     let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
-    # let(:group_course_disabled) { FactoryBot.create(:group_disabled) }
     it 'renders :index template' do
       get :index
       expect(response).to render_template(:index)
