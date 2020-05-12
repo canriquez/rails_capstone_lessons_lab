@@ -9,7 +9,7 @@ FactoryBot.define do
     online { true }
     presencial { true }
     enabled { true }
-    
+
     factory :group_enabled do
       # privacy { Achievement.privacies[:public_access] }
       enabled { true }
@@ -18,6 +18,5 @@ FactoryBot.define do
     factory :group_disabled do
       enabled { false }
     end
-
   end
 end

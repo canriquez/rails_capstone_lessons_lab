@@ -16,8 +16,8 @@ gem 'turbolinks', '~> 5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # I will use bootstrap
-gem 'gravatar_image_tag', '~> 1.2'
 gem 'bootstrap', '~> 4.0.0'
+gem 'gravatar_image_tag', '~> 1.2'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
 gem 'sassc-rails', '>= 2.1.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.2'
@@ -38,8 +38,8 @@ end
 
 group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.1'
-  gem 'rails-controller-testing'
   gem 'database_cleaner'
+  gem 'rails-controller-testing'
 end
 
 group :production do

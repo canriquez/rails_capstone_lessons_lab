@@ -6,14 +6,17 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a class="nav-link active" href="#">Active Courses</a>
+        <a id="enabled-tab"  data-turbolinks="false" class="nav-link active" href="">Active Courses (<span class="ena-course"><%= @group.enabled.count %></span>)</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Disabled Courses</a>
+        <a id="disabled-tab"  data-turbolinks="false" class="nav-link" href="">Disabled Courses (<span class="dis-course"><%= @group.disabled.count %></span>)</a>
       </li>
     </ul>
   </div>
-  <div class="">
-    <%= render 'layouts/active_courses' %>
+  <div id="enabled-courses" class="enabled">
+    <%= render 'layouts/enabled_courses' %>
+  </div>
+  <div id="disabled-courses" class="disabled">
+    <%= render 'layouts/disabled_courses' %>
   </div>
 </div>

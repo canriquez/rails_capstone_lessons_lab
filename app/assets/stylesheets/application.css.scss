@@ -57,10 +57,26 @@ body {
     box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
 }
 
+
+//***************************************************
+//**      confirmation modal initial setup        ***
+//***************************************************
+
 #confirmation {
     display: none;
 }
 
+//*****************************************************
+//**     index display courses initial setup        ***
+//*****************************************************
+
+.disabled {
+    display: none;
+}
+
+.enabled {
+    display: block;
+}
 
 //***************************
 //**       NAVBAR         ***

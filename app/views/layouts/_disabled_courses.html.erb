@@ -1,5 +1,5 @@
-<% @group.each do |course| %>
-  <div id="course-<%= course.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
+<% @group.disabled.each do |course| %>
+  <div data-turbolinks="false" id="course-<%= course.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
     <div class="card-header bg-transparent">
       <div class="media d-flex justify-content-between">
           <div class="header-left d-flex">
@@ -10,7 +10,7 @@
           </div>
           <div class="header-right">
             <small class="text-muted">Course started: <%= course.starting %></small>
-            <button type="button" class="course-on-btn shadows btn">
+            <button id="sw-<%= course.id %>" type="button" class="course-off-btn shadows btn sw">
               <%= svg('switch') %>
             </button>
           </div>

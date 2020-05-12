@@ -1,9 +1,6 @@
 class GroupsController < ApplicationController
-  
   def index
-    @group = Group.enabled
-    puts "HERE IS GROUPS/COURSES"
-    p @group
+    @group = Group.all
   end
 
   def new
@@ -14,7 +11,7 @@ class GroupsController < ApplicationController
     @group = Group.new(group_course_params)
     if @group.save
       redirect_to groups_path, notice: "Course #{@group.name} has been created"
-      #I redirect to the index of courses by design instead of tipically redirect to the new created course
+      # I redirect to the index of courses by design instead of tipically redirect to the new created course
     else
       render :new
     end
@@ -30,34 +27,27 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.find(params[:id])
-    if @group.update_attributes(group_course_params)  #if we succeed to update
-      redirect_to group_path(@group)  #then we show the update changes implemented 
-    else 
+    if @group.update_attributes(group_course_params) # if we succeed to update
+      redirect_to groups_path # then we show the update changes implemented
+    else
       render :edit
     end
-
   end
 
   def destroy
-    puts "WE GET TO DESTROY"
+    puts 'WE GET TO DESTROY'
     @course = Group.find(params[:id])
     @course.destroy
-    
-    #respond_to do |format|
-    #  #format.js 
-    #  format.html {redirect_to groups_path, notice: "Course #{@course.name } was  eliminated." }
-    #end
+    redirect_to groups_path, notice: "Course #{@course.name } was  eliminated."
   end
 
   def confirm_destroy
     @course = Group.find(params[:id])
     p @course
     respond_to do |format|
-      format.js 
+      format.js
     end
   end
-
-
 
   private
 
