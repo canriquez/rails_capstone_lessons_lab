@@ -120,9 +120,9 @@ describe GroupsController do
         let(:enabled_group_course) { FactoryBot.create(:group_enabled) }
         #we first create the grou/course we will test by destroying.
 
-        it "redirects to groups/courses index" do
+        it "not to redirect to groups/courses index as AJAX is in use" do
             delete :destroy, params: { id: enabled_group_course }
-            expect(response).to redirect_to(groups_path)
+            expect(response).to_not redirect_to(groups_path)
         end
         it "deletes group/course from database" do
             delete :destroy, params: { id: enabled_group_course }

@@ -5,6 +5,14 @@ $('#confirm_deletion').slideDown(350);
 
  $("#delete-action").click(function()
 {
-    $('#course-<%=@course.id%>').hide(500)
+
+    $('#course-<%=@course.id%>').hide(500);
     $('#confirm_deletion').modal('hide');
+
+    $.ajax('/groups/<%=@course.id%>', 
+        { type: 'DELETE', 
+            data: { _method: 'DELETE' },
+            data: { authenticity_token: $('[name="csrf-token"]')[0].content} 
+        });
+
 });
