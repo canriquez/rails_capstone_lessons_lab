@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_12_194136) do
+ActiveRecord::Schema.define(version: 2020_05_12_214438) do
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
@@ -24,12 +24,13 @@ ActiveRecord::Schema.define(version: 2020_05_12_194136) do
     t.string "cover_image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "author_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.string "email", default: "", null: false
-    t.string "integer", null: false
+    t.integer "role", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"

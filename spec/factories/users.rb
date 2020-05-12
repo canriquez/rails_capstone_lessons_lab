@@ -4,12 +4,12 @@ FactoryBot.define do
     password { "password" } 
     name  { "TestUser" }
 
-    factory :student do
-      enabled { :student }
+    factory :student_user do
+      role { :student }
     end
 
-    factory :teacher do
-      enabled { :teacher }
+    factory :teacher_user do
+      role { :teacher }
     end
   end
 end

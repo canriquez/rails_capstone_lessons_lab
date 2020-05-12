@@ -1,4 +1,7 @@
 class Group < ApplicationRecord
+
+  belongs_to :author, class_name: 'User'
+
   validates :name, presence: true,
                    length: { maximum: 50 },
                    uniqueness: true
@@ -12,4 +15,6 @@ class Group < ApplicationRecord
 
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
+  
+
 end

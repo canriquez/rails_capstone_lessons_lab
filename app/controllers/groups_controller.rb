@@ -1,4 +1,7 @@
 class GroupsController < ApplicationController
+  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :authors_only, only: [ :edit, :update, :destroy, :confirm_destroy ]
+
   def index
     @group = Group.all
   end
@@ -22,11 +25,9 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
   end
 
   def update
-    @group = Group.find(params[:id])
     if @group.update_attributes(group_course_params) # if we succeed to update
       redirect_to groups_path # then we show the update changes implemented
     else
@@ -36,13 +37,11 @@ class GroupsController < ApplicationController
 
   def destroy
     puts 'WE GET TO DESTROY'
-    @course = Group.find(params[:id])
     @course.destroy
     redirect_to groups_path, notice: "Course #{@course.name } was  eliminated."
   end
 
   def confirm_destroy
-    @course = Group.find(params[:id])
     p @course
     respond_to do |format|
       format.js
@@ -56,4 +55,13 @@ class GroupsController < ApplicationController
                                   :price, :online, :presencial, :classroom,
                                   :cover_image, :starting, :enabled)
   end
+
+  def authors_only
+    @group = Group.find(params[:id])
+    @course = @group
+    if current_user != @group.author 
+      redirect_to groups_path
+    end
+  end
+
 end

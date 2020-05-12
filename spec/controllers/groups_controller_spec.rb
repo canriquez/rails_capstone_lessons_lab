@@ -1,16 +1,180 @@
 require 'rails_helper'
 
 describe GroupsController do
-  describe 'GET course index' do
-    let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
-    it 'renders :index template' do
-      get :index
-      expect(response).to render_template(:index)
+
+  describe "Student User " do
+
+    describe 'GET course index' do
+      let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
+      it 'renders :index template' do
+        get :index
+        expect(response).to render_template(:index)
+      end
+      it "selects only 'enabled' courses in the index" do
+        get :index
+        expect(assigns(:group)).to match_array([group_course_enabled])
+      end
     end
-    it "selects only 'enabled' courses in the index - any delivery info flag is true -" do
-      get :index
-      expect(assigns(:group)).to match_array([group_course_enabled])
+
+    describe 'GET show course' do
+      let(:group_course) { FactoryBot.create(:group) }
+      it 'renders :show template' do
+        get :show, params: { id: group_course }
+        expect(response).to render_template(:show)
+      end
+      it 'assigns requested Group to the @group instance variable' do
+        get :show, params: { id: group_course }
+        expect(assigns(:group)).to eq(group_course)
+        #:group is the variable defined in the groups_controller.rb file
+      end
     end
+
+    #A student cannot create a new course
+    describe "GET new course" do
+      it "fails to render the new course form and redirects to login page" do
+        get :new
+        expect(response).to redirect_to(new_user_session_url)
+      end
+    end
+
+    describe 'POST course create' do
+      let(:valid_course_data) { FactoryBot.attributes_for(:group) }  
+        it 'fails and redirects to login page instead as student cannot create courses' do
+          post :create, params: { group: valid_course_data }
+          expect(response).to redirect_to(new_user_session_url)
+        end
+    end
+
+    describe 'GET course edit' do
+      let(:valid_group_course) { FactoryBot.create(:group) }
+      it 'fails to render :edit template' do
+        get :edit, params: { id: valid_group_course }
+        expect(response).to redirect_to(new_user_session_url)
+      end
+    end
+
+    describe 'PUT request to update course' do
+      let(:valid_group_course) { FactoryBot.create(:group) }
+      let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
+      it 'fails to PUT a change on the course record' do
+        put :update, params: { id: valid_group_course, group: valid_course_data_change }
+        expect(response).to redirect_to(new_user_session_url)
+      end
+    end
+
+    describe 'DELETE request to destroy a course record' do
+      let(:valid_group_course) { FactoryBot.create(:group) }
+      it 'fails to destroy a course record' do
+        delete :destroy, params: { id: valid_group_course }
+        expect(response).to redirect_to(new_user_session_url)
+      end
+    end
+
+  end
+
+  describe "Teacher User" do
+    let(:teacher_user) { FactoryBot.create(:teacher_user) }
+    let(:another_teacher_user) { FactoryBot.create(:teacher_user) }
+    before do
+      sign_in(teacher_user)
+    end
+
+    describe 'GET course index' do
+      let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
+      it 'renders :index template' do
+        get :index
+        expect(response).to render_template(:index)
+      end
+      it "selects only 'enabled' courses in the index" do
+        get :index
+        expect(assigns(:group)).to match_array([group_course_enabled])
+      end
+    end
+
+    describe 'GET show course' do
+      let(:group_course) { FactoryBot.create(:group) }
+      it 'renders :show template' do
+        get :show, params: { id: group_course }
+        expect(response).to render_template(:show)
+      end
+      it 'assigns requested Group to the @group instance variable' do
+        get :show, params: { id: group_course }
+        expect(assigns(:group)).to eq(group_course)
+        #:group is the variable defined in the groups_controller.rb file
+      end
+    end
+
+    describe 'GET new' do
+      it 'renders :new template' do
+        get :new
+        expect(response).to render_template(:new)
+      end
+      it 'assigns new Group to @group instance variable' do
+        get :new
+        expect(assigns(:group)).to be_a_new(Group)
+      end
+    end
+  
+    describe 'POST create' do
+      let(:valid_course_data) { FactoryBot.attributes_for(:group) }
+      let(:invalid_course_data) { FactoryBot.attributes_for(:group, name: nil) }
+  
+      context 'with valid data' do
+        it 'redirects to show the course index in  goups#index' do
+          post :create, params: { group: valid_course_data }
+          expect(response).to redirect_to(groups_path)
+        end
+        it 'creates a new group/course in the database' do
+          expect do
+            post :create, params: { group: valid_course_data }
+          end.to change(Group, :count).by(1)
+        end
+      end
+      context 'with invalid data' do
+        it 'redirects to :new and shows :error notice' do
+          post :create, params: { group: invalid_course_data }
+          expect(response).to render_template(:new)
+          # expect(response).to have_content("can't be blank")
+        end
+        it 'does not create a new :group in the database' do
+          expect do
+            post :create, params: { group: invalid_course_data }
+          end.not_to change(Group, :count)
+        end
+      end
+    end
+
+    context "and teacher is not the owner of the course" do
+
+      describe 'GET course edit' do
+        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
+        it 'fails to render :edit template redirects to course index' do
+          get :edit, params: { id: valid_group_course }
+          expect(response).to redirect_to(groups_path)
+        end
+      end
+  
+      describe 'PUT request to update course' do
+        let(:valid_group_course) { FactoryBot.create(:group) }
+        let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
+        it 'fails to PUT a change on the course record redirects to course index' do
+          put :update, params: { id: valid_group_course, group: valid_course_data_change }
+          expect(response).to redirect_to(groups_path)
+        end
+      end
+  
+      describe 'DELETE request to destroy a course record' do
+        let(:valid_group_course) { FactoryBot.create(:group) }
+        it 'fails to destroy a course record redirects to course index' do
+          delete :destroy, params: { id: valid_group_course }
+          expect(response).to redirect_to(groups_path)
+        end
+      end
+      
+    end
+    
+    context "teacher is the owner of the course"
+
   end
 
   describe 'GET edit' do
@@ -55,59 +219,6 @@ describe GroupsController do
         enabled_group_course.reload # I reload DB record to fetch new object changes
         expect(enabled_group_course.name).not_to eq('Course name update')
         # I check directly in the DB (integration test)
-      end
-    end
-  end
-
-  describe 'GET new' do
-    it 'renders :new template' do
-      get :new
-      expect(response).to render_template(:new)
-    end
-    it 'assigns new Group to @group instance variable' do
-      get :new
-      expect(assigns(:group)).to be_a_new(Group)
-    end
-  end
-
-  describe 'GET show' do
-    let(:group_course) { FactoryBot.create(:group) }
-    it 'renders :show template' do
-      get :show, params: { id: group_course }
-      expect(response).to render_template(:show)
-    end
-    it 'assigns requested Group to the @group instance variable' do
-      get :show, params: { id: group_course }
-      expect(assigns(:group)).to eq(group_course)
-      #:group is the variable defined in the groups_controller.rb file
-    end
-  end
-
-  describe 'POST create' do
-    let(:valid_course_data) { FactoryBot.attributes_for(:group) }
-    let(:invalid_course_data) { FactoryBot.attributes_for(:group, name: nil) }
-
-    context 'with valid data' do
-      it 'redirects to show the course index in  goups#index' do
-        post :create, params: { group: valid_course_data }
-        expect(response).to redirect_to(groups_path)
-      end
-      it 'creates a new group/course in the database' do
-        expect do
-          post :create, params: { group: valid_course_data }
-        end.to change(Group, :count).by(1)
-      end
-    end
-    context 'with invalid data' do
-      it 'redirects to :new and shows :error notice' do
-        post :create, params: { group: invalid_course_data }
-        expect(response).to render_template(:new)
-        # expect(response).to have_content("can't be blank")
-      end
-      it 'does not create a new :group in the database' do
-        expect do
-          post :create, params: { group: invalid_course_data }
-        end.not_to change(Group, :count)
       end
     end
   end
