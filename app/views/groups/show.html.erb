@@ -1,5 +1,12 @@
   <div class="couse_name card border-light mb-0" style="max-width: 28rem;">
-    <div class="card-header ">Course Name</div>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Course Name</span>
+        <button value="view" name="view" type="button" class="view shadows icon-btn btn">
+         <%= link_to groups_path do %>
+          <%= svg('back') %>
+          <% end %>
+        </button>
+    </div>
       <div class="card-body">
         <h5 class="card-title mb-0"><%= @group.name %></h5>
       </div>
