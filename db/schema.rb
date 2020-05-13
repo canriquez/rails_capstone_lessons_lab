@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2020_05_13_110914) do
 
   create_table "enrolls", force: :cascade do |t|
-    t.integer "enrolled_student_id"
-    t.integer "course_enrolled_id"
+    t.integer "student_id"
+    t.integer "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
