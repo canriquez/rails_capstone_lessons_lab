@@ -48,40 +48,40 @@ describe GroupsController do
     describe "GET new course" do
       it "fails to render the new course form and redirects to login page" do
         get :new
-        expect(response).to redirect_to(new_user_session_url)
+        expect(response).to redirect_to(groups_path)
       end
     end
 
     describe 'POST course create' do
-      let(:valid_course_data) { FactoryBot.attributes_for(:group) }  
+      let(:course_1) { FactoryBot.create(:group_enabled, author: teacher_1) }  
         it 'fails and redirects to login page instead as student cannot create courses' do
-          post :create, params: { group: valid_course_data }
-          expect(response).to redirect_to(new_user_session_url)
+          post :create, params: { group: course_1}
+          expect(response).to redirect_to(groups_path)
         end
     end
 
-    describe 'GET course edit' do
-      let(:valid_group_course) { FactoryBot.create(:group) }
-      it 'fails to render :edit template' do
-        get :edit, params: { id: valid_group_course }
-        expect(response).to redirect_to(new_user_session_url)
+    describe 'GET course for edit' do
+      let(:course_1) { FactoryBot.create(:group_enabled, author: teacher_1) }   
+      it 'fails to render :edit template as students are not allowed to edit courses' do
+        get :edit, params: { id: course_1 }
+        expect(response).to redirect_to(groups_path)
       end
     end
 
     describe 'PUT request to update course' do
-      let(:valid_group_course) { FactoryBot.create(:group) }
+      let(:course_1) { FactoryBot.create(:group_enabled, author: teacher_1) }   
       let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
       it 'fails to PUT a change on the course record' do
-        put :update, params: { id: valid_group_course, group: valid_course_data_change }
-        expect(response).to redirect_to(new_user_session_url)
+        put :update, params: { id: course_1, group: valid_course_data_change }
+        expect(response).to redirect_to(groups_path)
       end
     end
 
     describe 'DELETE request to destroy a course record' do
-      let(:valid_group_course) { FactoryBot.create(:group) }
+      let(:course_1) { FactoryBot.create(:group_enabled, author: teacher_1) }   
       it 'fails to destroy a course record' do
-        delete :destroy, params: { id: valid_group_course }
-        expect(response).to redirect_to(new_user_session_url)
+        delete :destroy, params: { id: course_1 }
+        expect(response).to redirect_to(groups_path)
       end
     end
 

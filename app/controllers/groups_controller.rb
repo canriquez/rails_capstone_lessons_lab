@@ -2,6 +2,7 @@ class GroupsController < ApplicationController
   before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
   before_action :authors_only, only: [ :edit, :update, :destroy, :confirm_destroy ]
   before_action :authors_or_enrolled_only, only: [ :show ]
+  before_action :teachers_only, only: [ :new, :create]
 
 
   def index
@@ -73,6 +74,14 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     return if current_user == @group.author || current_user.enrolled(@group)
     
-    redirect_to groups_paths
+    redirect_to groups_paths, notice: 'you are not authorised for this action'
   end
+
+  def teachers_only
+    return if current_user.role != 'student'
+    redirect_to groups_path, notice: 'you are not authorised for this action'
+
+  end
+
+
 end
