@@ -3,34 +3,44 @@ require 'rails_helper'
 describe GroupsController do
 
   describe "Student User " do
-    let(:teacher_user) { FactoryBot.create(:student_user) }
-    let(:student_user) { FactoryBot.create(:student_user) }
+    #we create student, course and login as student
+    let(:teacher_1) { FactoryBot.create(:student_user) }
+    let(:student_1) { FactoryBot.create(:student_user) }
+    let(:other_student) { FactoryBot.create(:student_user) }
+
+    let(:other_student_enrolled_course_1) {FactoryBot.create(:enroll, student: student_1, course: course_1)}
     before do
-      sign_in(student_user)
+      sign_in(student_1)
     end
 
-    describe 'GET course index' do
-      let(:group_course_enabled) { FactoryBot.create(:group_enabled, author: teacher_user) }
-      it 'renders :index template' do
+    describe 'GET course index list where student is enrolled' do
+      it 'renders :index template' do      
         get :index
         expect(response).to render_template(:index)
       end
-      it "selects only 'enabled' courses in the index" do
+      it "selects only 'enrolled' courses for the student to show on index" do
+        course_1 = FactoryBot.create(:group_enabled, author: teacher_1)
+        FactoryBot.create(:enroll, student: student_1, course: course_1)
+
         get :index
-        expect(assigns(:group)).to match_array([group_course_enabled])
+        expect(assigns(:student_courses)).to match_array([course_1])
       end
     end
 
     describe 'GET show course' do
-      let(:group_course) { FactoryBot.create(:group) }
-      it 'renders :show template' do
-        get :show, params: { id: group_course }
+
+      it 'renders :show template only if user is enrolled in the course' do
+        course_1 = FactoryBot.create(:group_enabled, author: teacher_1)
+        FactoryBot.create(:enroll, student: student_1, course: course_1)
+        get :show, params: { id: course_1 }
         expect(response).to render_template(:show)
       end
-      it 'assigns requested Group to the @group instance variable' do
-        get :show, params: { id: group_course }
-        expect(assigns(:group)).to eq(group_course)
-        #:group is the variable defined in the groups_controller.rb file
+      it 'assigns requested course to the @student_course variable for the loged_in student' do
+        course_1 = FactoryBot.create(:group_enabled, author: teacher_1)
+        FactoryBot.create(:enroll, student: student_1, course: course_1)
+        get :show, params: { id: course_1 }
+        expect(assigns(:group)).to eq(course_1)
+        #:group is the variable defined in the groups_controller.rb file for eny course.
       end
     end
 

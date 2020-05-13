@@ -2,7 +2,7 @@ class Group < ApplicationRecord
 
   belongs_to :author, class_name: 'User'
   has_many :enrollments, foreign_key: 'course_id', class_name: 'Enroll'
-  has_many :booked_sessions, foreign_key: 'course_taught_id', class_name: 'Transaction'
+  #has_many :booked_sessions, foreign_key: 'course_taught_id', class_name: 'Transaction'
 
 
   validates :name, presence: true,
@@ -18,6 +18,8 @@ class Group < ApplicationRecord
 
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
+
+  scope :student_courses, ->(current_user) { where(id: current_user.enrolled_courses)}
   
 
 end

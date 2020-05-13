@@ -8,8 +8,6 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.integer :minutes
 
       t.timestamps
-      add_foreign_key :transactions, :enrolls, column: :enrolled_session_id, primary_key: "id"
-      add_foreign_key :transactions, :groups, column: :course_taught_id, primary_key: "id"
     end
   end
 end

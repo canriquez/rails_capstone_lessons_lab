@@ -1,11 +1,13 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
+  before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
   before_action :authors_only, only: [ :edit, :update, :destroy, :confirm_destroy ]
-  before_action :authors_enrolled_only, only: [ :show ]
+  before_action :authors_or_enrolled_only, only: [ :show ]
 
 
   def index
     @group = Group.all
+    @student_courses = Group.student_courses(current_user)
+
   end
 
   def show
@@ -67,6 +69,10 @@ class GroupsController < ApplicationController
     end
   end
 
-  def authors_enrolled_only
+  def authors_or_enrolled_only
+    @group = Group.find(params[:id])
+    return if current_user == @group.author || current_user.enrolled(@group)
+    
+    redirect_to groups_paths
   end
 end
