@@ -29,6 +29,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 4.0'
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
+  gem 'hirb'
 end
 
 group :development do
