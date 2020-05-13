@@ -3,9 +3,14 @@ require 'rails_helper'
 describe GroupsController do
 
   describe "Student User " do
+    let(:teacher_user) { FactoryBot.create(:student_user) }
+    let(:student_user) { FactoryBot.create(:student_user) }
+    before do
+      sign_in(student_user)
+    end
 
     describe 'GET course index' do
-      let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
+      let(:group_course_enabled) { FactoryBot.create(:group_enabled, author: teacher_user) }
       it 'renders :index template' do
         get :index
         expect(response).to render_template(:index)
@@ -92,7 +97,7 @@ describe GroupsController do
     end
 
     describe 'GET show course' do
-      let(:group_course) { FactoryBot.create(:group) }
+      let(:group_course) { FactoryBot.create(:group, author:teacher_user) }
       it 'renders :show template' do
         get :show, params: { id: group_course }
         expect(response).to render_template(:show)
@@ -155,7 +160,7 @@ describe GroupsController do
       end
   
       describe 'PUT request to update course' do
-        let(:valid_group_course) { FactoryBot.create(:group) }
+        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
         let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
         it 'fails to PUT a change on the course record redirects to course index' do
           put :update, params: { id: valid_group_course, group: valid_course_data_change }
@@ -164,7 +169,7 @@ describe GroupsController do
       end
   
       describe 'DELETE request to destroy a course record' do
-        let(:valid_group_course) { FactoryBot.create(:group) }
+        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
         it 'fails to destroy a course record redirects to course index' do
           delete :destroy, params: { id: valid_group_course }
           expect(response).to redirect_to(groups_path)
@@ -173,67 +178,65 @@ describe GroupsController do
       
     end
     
-    context "teacher is the owner of the course"
+    context "teacher is the owner of the course" do
+      let(:enabled_group_course) { FactoryBot.create(:group_enabled, author: teacher_user) }
+      describe 'GET edit' do    
+        it 'renders :edit template' do
+          get :edit, params: { id: enabled_group_course }
+          expect(response).to render_template(:edit)
+        end
+        it 'assigns the requested group/course to the view' do
+          get :edit, params: { id: enabled_group_course }
+          expect(assigns(:group)).to eq(enabled_group_course)
+        end
+      end
+    
+      describe 'PUT update action with ' do
+        # we first create the grou/course we will test by updating with valid and invalid data.  
+        context 'valid data for enabled group/course' do
+          let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
+    
+          it 'redirects to groups#show action' do
+            put :update, params: { id: enabled_group_course, group: valid_course_data_change }
+            expect(response).to_not redirect_to(enabled_group_course)
+          end
+          it 'updates group/course changes in the database' do
+            put :update, params: { id: enabled_group_course, group: valid_course_data_change }
+            enabled_group_course.reload # I reload DB record to fetch new object changes
+            expect(enabled_group_course.name).to eq('Course name update') # I check directly in the DB (integration test)
+          end
+        end
+    
+        context 'invalid data with enabled group/course' do
+          let(:invalid_course_data_change) { FactoryBot.attributes_for(:group, name: nil) }
+    
+          it 'renders :edit view template' do
+            put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
+            expect(response).to render_template(:edit)
+          end
+          it 'fails to update the group/course changes in the DB' do
+            put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
+            enabled_group_course.reload # I reload DB record to fetch new object changes
+            expect(enabled_group_course.name).not_to eq('Course name update')
+            # I check directly in the DB (integration test)
+          end
+        end
+      end
+    
+      describe 'DELETE action to destroy' do
+        # we first create the grou/course we will test by destroying.
+        it 'not to redirect to groups/courses index as AJAX is in use' do
+          delete :destroy, params: { id: enabled_group_course }
+          expect(response).to redirect_to(groups_path)
+        end
+        it 'deletes group/course from database' do
+          delete :destroy, params: { id: enabled_group_course }
+          expect(Group.exists?(enabled_group_course.id)).to be_falsy
+        end
+      end
+    end
 
   end
 
-  describe 'GET edit' do
-    let(:enabled_group_course) { FactoryBot.create(:group_enabled) }
-    it 'renders :edit template' do
-      get :edit, params: { id: enabled_group_course }
-      expect(response).to render_template(:edit)
-    end
-    it 'assigns the requested group/course to the view' do
-      get :edit, params: { id: enabled_group_course }
-      expect(assigns(:group)).to eq(enabled_group_course)
-    end
-  end
 
-  describe 'PUT update action with ' do
-    let(:enabled_group_course) { FactoryBot.create(:group_enabled) }
-    # we first create the grou/course we will test by updating with valid and invalid data.
-
-    context 'valid data for enabled group/course' do
-      let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
-
-      it 'redirects to groups#show action' do
-        put :update, params: { id: enabled_group_course, group: valid_course_data_change }
-        expect(response).to_not redirect_to(enabled_group_course)
-      end
-      it 'updates group/course changes in the database' do
-        put :update, params: { id: enabled_group_course, group: valid_course_data_change }
-        enabled_group_course.reload # I reload DB record to fetch new object changes
-        expect(enabled_group_course.name).to eq('Course name update') # I check directly in the DB (integration test)
-      end
-    end
-
-    context 'invalid data with enabled group/course' do
-      let(:invalid_course_data_change) { FactoryBot.attributes_for(:group, name: nil) }
-
-      it 'renders :edit view template' do
-        put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
-        expect(response).to render_template(:edit)
-      end
-      it 'fails to update the group/course changes in the DB' do
-        put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
-        enabled_group_course.reload # I reload DB record to fetch new object changes
-        expect(enabled_group_course.name).not_to eq('Course name update')
-        # I check directly in the DB (integration test)
-      end
-    end
-  end
-
-  describe 'DELETE action to destroy' do
-    let(:enabled_group_course) { FactoryBot.create(:group_enabled) }
-    # we first create the grou/course we will test by destroying.
-
-    it 'not to redirect to groups/courses index as AJAX is in use' do
-      delete :destroy, params: { id: enabled_group_course }
-      expect(response).to redirect_to(groups_path)
-    end
-    it 'deletes group/course from database' do
-      delete :destroy, params: { id: enabled_group_course }
-      expect(Group.exists?(enabled_group_course.id)).to be_falsy
-    end
-  end
 end

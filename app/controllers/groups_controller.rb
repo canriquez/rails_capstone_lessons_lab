@@ -1,10 +1,17 @@
 class GroupsController < ApplicationController
   before_action :authenticate_user!, only: [ :new, :create, :edit, :update, :destroy ]
   before_action :authors_only, only: [ :edit, :update, :destroy, :confirm_destroy ]
+  before_action :authors_enrolled_only, only: [ :show ]
+
 
   def index
     @group = Group.all
   end
+
+  def show
+    @group = Group.find(params[:id])
+  end
+
 
   def new
     @group = Group.new
@@ -18,10 +25,6 @@ class GroupsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @group = Group.find(params[:id])
   end
 
   def edit
@@ -64,4 +67,6 @@ class GroupsController < ApplicationController
     end
   end
 
+  def authors_enrolled_only
+  end
 end
