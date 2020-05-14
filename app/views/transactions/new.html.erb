@@ -1,6 +1,6 @@
 <%= simple_form_for  @transaction do |f| %>
     <%= f.input :course_taught_id, collection: Hash[auth_course_options], label: "Select Course" %> 
-    <%= f.input :student_id, collection: [ ' ' ],label: "Select Student" %>
+    <%= f.input :sitting_student_id, collection: [ ' ' ],label: "Select Student" %>
     <%= f.input :minutes, label: "Session Duration (min)"%>
 
     <%= f.submit 'Save Booking', class: 'btn btn-primary', data: { "disable-with": "Saving..." } %>

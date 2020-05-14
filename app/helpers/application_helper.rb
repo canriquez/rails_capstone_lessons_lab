@@ -24,4 +24,8 @@ module ApplicationHelper
   def toggle_icon(value)
     value ? svg('on') : svg('off')
   end
+
+  def to_date(record)
+    (Date.parse(record).strftime("%d/%m/%Y %H:%M")).html_safe
+  end
 end

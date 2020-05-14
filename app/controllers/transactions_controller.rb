@@ -1,18 +1,21 @@
 class TransactionsController < ApplicationController
     def index
-        if current_user.role == 'teacher'
-        @transaction = Transaction.find_by_sql("SELECT s.*, users.name
-            FROM (SELECT transactions.id as transaction_id, enrolls.student_id as student_id, groups.name as course_name,  transactions.minutes, transactions.status,   groups.price, transactions.created_at
-            FROM transactions
-            JOIN enrolls
-            ON transactions.enrolled_session_id = enrolls.id
-            JOIN groups
-            ON transactions.course_taught_id = groups.id
-            WHERE transactions.teacher_id = ? ) as s
-            JOIN users
-            ON users.id = s.student_id ORDER BY created_at DESC", current_user)
-        p @transaction
-        end
+
+      if current_user.role == 'teacher'
+        @transactions = Transaction.select("transactions.id, transactions.created_at as date, 
+                                          users.name as student_name, groups.name as course_name, 
+                                          transactions.minutes as minutes, groups.price as price, 
+                                          transactions.status as status, transactions.accdate as accepted_date").
+        joins(:sitting_student, :course_taught).
+        where(teacher_id: current_user)
+      else 
+        @transactions = Transaction.select("transactions.*, users.*,groups.*").
+        joins(:sitting_student, :course_taught).
+        where(sitting_student_id: current_user)
+      end
+
+        p @transactions
+
     end
 
     def new
@@ -35,7 +38,7 @@ class TransactionsController < ApplicationController
     private
 
   def transaction_params
-    params.require(:transaction).permit(:course_taught_id, :enrolled_session_id, :minutes )
+    params.require(:transaction).permit(:course_taught_id, :sitting_student_id, :minutes )
   end
 
     

@@ -3,10 +3,10 @@ FactoryBot.define do
     teacher_id { 1 }
 
     factory :billable do
-      student_id { 1 }
+      sitting_student_id { 1 }
       course_taught_id { 1 }
       minutes { 15 }
-      status { 1 }
+      status { 0 }
     end
 
     factory :non_billable do

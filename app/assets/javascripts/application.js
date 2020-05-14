@@ -81,18 +81,18 @@ $(document).on('turbolinks:load', function () {
     $(function () {
 
         //clean the enrolled student option on page load and touch (this is specially helpful if teacher change courses)
-        if ($("select#transaction_student_id").val() == "") {
-            $("select#transaction_student_id option").remove();
+        if ($("select#transaction_sitting_student_id").val() == "") {
+            $("select#transaction_sitting_student_id option").remove();
             var row = "<option value=\"" + "" + "\">" + "Select Course to see enrolled Students" + "</option>";
-            $(row).appendTo("select#transaction_student_id");
+            $(row).appendTo("select#transaction_sitting_student_id");
         }
         $("select#transaction_course_taught_id").change(function () {
             var id_value_string = $(this).val();
             console.log('id_value_string_is :' + id_value_string)
             if (id_value_string == "") {
-                $("select#transaction_student_id option").remove();
+                $("select#transaction_sitting_student_id option").remove();
                 var row = "<option value=\"" + "" + "\">" + "You have to select a valid course" + "</option>";
-                $(row).appendTo("select#transaction_student_id");
+                $(row).appendTo("select#transaction_sitting_student_id");
             } else {
                 // Send the request and update course dropdown
                 Rails.ajax({
@@ -104,16 +104,16 @@ $(document).on('turbolinks:load', function () {
                     success: function (data) {
                         console.log('it responds from the success_line')
                         // Clear all options from course select
-                        $("select#transaction_student_id option").remove();
+                        $("select#transaction_sitting_student_id option").remove();
                         //put in a empty default line
                         var row = "<option value=\"" + "" + "\">" + "" + "</option>";
-                        $(row).appendTo("select#transaction_student_id");
+                        $(row).appendTo("select#transaction_sitting_student_id");
                         // Fill course select
                         myArray = []
                         $.each(data, function (i, j) {
                             row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
                             console.log(row)
-                            $(row).appendTo("select#transaction_student_id");
+                            $(row).appendTo("select#transaction_sitting_student_id");
                         });
 
                     }
