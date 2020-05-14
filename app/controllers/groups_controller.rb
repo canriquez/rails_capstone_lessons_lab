@@ -6,8 +6,8 @@ class GroupsController < ApplicationController
 
 
   def index
-    @group = Group.all
-    @student_courses = Group.student_courses(current_user)
+    @group = Group.authored_courses(current_user)
+    @student_courses = Group.enrolled_courses(current_user)
 
   end
 
@@ -22,6 +22,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_course_params)
+    @group.author_id = current_user.id  #It is required only in testing.
     if @group.save
       redirect_to groups_path, notice: "Course #{@group.name} has been created"
       # I redirect to the index of courses by design instead of tipically redirect to the new created course
@@ -59,7 +60,7 @@ class GroupsController < ApplicationController
   def group_course_params
     params.require(:group).permit(:name, :description, :duration,
                                   :price, :online, :presencial, :classroom,
-                                  :cover_image, :starting, :enabled)
+                                  :cover_image, :starting, :enabled, :author_id)
   end
 
   def authors_only
@@ -79,6 +80,7 @@ class GroupsController < ApplicationController
 
   def teachers_only
     return if current_user.role != 'student'
+    puts 'WARNING TEACHERS ONLY FAILED'
     redirect_to groups_path, notice: 'you are not authorised for this action'
 
   end

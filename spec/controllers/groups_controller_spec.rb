@@ -1,10 +1,11 @@
 require 'rails_helper'
 
+
 describe GroupsController do
 
   describe "Student User " do
     #we create student, course and login as student
-    let(:teacher_1) { FactoryBot.create(:student_user) }
+    let(:teacher_1) { FactoryBot.create(:teacher_user) }
     let(:student_1) { FactoryBot.create(:student_user) }
     let(:other_student) { FactoryBot.create(:student_user) }
 
@@ -88,39 +89,42 @@ describe GroupsController do
   end
 
   describe "Teacher User" do
-    let(:teacher_user) { FactoryBot.create(:teacher_user) }
-    let(:another_teacher_user) { FactoryBot.create(:teacher_user) }
+    let(:teacher_1) { FactoryBot.create(:teacher_user) }
+    let(:teacher_2) { FactoryBot.create(:teacher_user) }
+
     before do
-      sign_in(teacher_user)
+      sign_in(teacher_1)
     end
 
     describe 'GET course index' do
-      let(:group_course_enabled) { FactoryBot.create(:group_enabled) }
       it 'renders :index template' do
         get :index
         expect(response).to render_template(:index)
       end
-      it "selects only 'enabled' courses in the index" do
+      it "selects only coursed where teacher is the author" do
+        course_1 = FactoryBot.create(:group_enabled, name: 'teacher 1 course', author: teacher_1)
+        course_2 = FactoryBot.create(:group_enabled, name: 'teacher 2 course', author: teacher_2)
         get :index
-        expect(assigns(:group)).to match_array([group_course_enabled])
+        expect(assigns(:group)).to match_array([course_1])
       end
     end
 
     describe 'GET show course' do
-      let(:group_course) { FactoryBot.create(:group, author:teacher_user) }
-      it 'renders :show template' do
-        get :show, params: { id: group_course }
+      it 'renders :show template and is able to edit authored courses' do
+        course_1 = FactoryBot.create(:group_enabled, name: 'teacher 1 course', author: teacher_1)
+        get :show, params: { id: course_1 }
         expect(response).to render_template(:show)
       end
-      it 'assigns requested Group to the @group instance variable' do
-        get :show, params: { id: group_course }
-        expect(assigns(:group)).to eq(group_course)
+      it 'assigns the authored course to the @group instance variable (for edition)' do
+        course_1 = FactoryBot.create(:group_enabled, name: 'teacher 1 course', author: teacher_1)
+        get :show, params: { id: course_1 }
+        expect(assigns(:group)).to eq(course_1)
         #:group is the variable defined in the groups_controller.rb file
       end
     end
 
-    describe 'GET new' do
-      it 'renders :new template' do
+    describe 'GET new for teacher' do
+      it 'renders :new template to create a new course' do
         get :new
         expect(response).to render_template(:new)
       end
@@ -131,8 +135,8 @@ describe GroupsController do
     end
   
     describe 'POST create' do
-      let(:valid_course_data) { FactoryBot.attributes_for(:group) }
-      let(:invalid_course_data) { FactoryBot.attributes_for(:group, name: nil) }
+      let(:valid_course_data) { FactoryBot.attributes_for(:group, name: 'teacher-1 course', author: teacher_1.id) }
+      let(:invalid_course_data) { FactoryBot.attributes_for(:group, name: nil, author: teacher_1.id) }
   
       context 'with valid data' do
         it 'redirects to show the course index in  goups#index' do
@@ -145,6 +149,7 @@ describe GroupsController do
           end.to change(Group, :count).by(1)
         end
       end
+      
       context 'with invalid data' do
         it 'redirects to :new and shows :error notice' do
           post :create, params: { group: invalid_course_data }

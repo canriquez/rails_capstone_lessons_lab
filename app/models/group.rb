@@ -19,7 +19,8 @@ class Group < ApplicationRecord
   scope :enabled, -> { where(enabled: true) }
   scope :disabled, -> { where(enabled: false) }
 
-  scope :student_courses, ->(current_user) { where(id: current_user.enrolled_courses)}
+  scope :enrolled_courses, ->(current_user) { where(id: current_user.enrolled_courses)}
+  scope :authored_courses, ->(current_user) { where(id: current_user.authored_courses)}
   
 
 end

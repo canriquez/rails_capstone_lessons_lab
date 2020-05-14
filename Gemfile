@@ -30,6 +30,7 @@ group :development, :test do
   gem 'spring'
   gem 'spring-commands-rspec', '~> 1.0', '>= 1.0.4'
   gem 'hirb'
+  gem 'jsonapi-rb', '~> 0.5.0'
 end
 
 group :development do
