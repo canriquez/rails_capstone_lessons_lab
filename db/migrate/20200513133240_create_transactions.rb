@@ -6,6 +6,7 @@ class CreateTransactions < ActiveRecord::Migration[5.2]
       t.integer :course_taught_id
       t.integer :status
       t.integer :minutes
+      t.date    :accdate
 
       t.timestamps
     end

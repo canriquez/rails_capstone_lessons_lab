@@ -16,6 +16,5 @@ class User < ApplicationRecord
     enrolled_courses.where(course_id: course).count > 0
   end
 
-
 end
  
