@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe Group, type: :model do
 
     describe 'validations' do
-        it 'requires title' do
+        it 'requires name' do
             group = Group.new(name: '')
             group.valid? 
             expect(group.valid?).to be_falsy

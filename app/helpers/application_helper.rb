@@ -1,5 +1,12 @@
 module ApplicationHelper
-  def session_duration_options
+  def auth_course_options
+    course_options = Group.select("name as course_name, id as course_taught_id").
+                     where(id: current_user.authored_courses)
+    c_options = course_options.map {|a| [a.course_name,a.course_taught_id] }
+    c_options
+  end
+
+  def authored_course_options
     options = (1..8).map { |num| [(num * 15).to_s + ' min', num * 15] }
     options
   end

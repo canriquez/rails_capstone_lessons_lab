@@ -14,7 +14,6 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
-
 //= require jquery3
 //= require popper
 //= require bootstrap
@@ -74,6 +73,52 @@ $(document).on('turbolinks:load', function () {
                 }
             });
         });
+    });
+
+
+    //Dynamic select box populator for enrolled students
+
+    $(function () {
+
+        //clean the enrolled student option on page load and touch (this is specially helpful if teacher change courses)
+        if ($("select#transaction_enrolled_session_id").val() == "") {
+            $("select#transaction_enrolled_session_id option").remove();
+            var row = "<option value=\"" + "" + "\">" + "Select Course to see enrolled Students" + "</option>";
+            $(row).appendTo("select#transaction_enrolled_session_id");
+        }
+        $("select#transaction_course_taught_id").change(function () {
+            var id_value_string = $(this).val();
+            console.log('id_value_string_is :' + id_value_string)
+            if (id_value_string == "") {
+                $("select#transaction_enrolled_session_id option").remove();
+                var row = "<option value=\"" + "" + "\">" + "You have to select a valid course" + "</option>";
+                $(row).appendTo("select#transaction_enrolled_session_id");
+            } else {
+                // Send the request and update course dropdown
+                Rails.ajax({
+                    url: '/enrolled/' + id_value_string,
+                    type: "GET",
+                    error: function (XMLHttpRequest, errorTextStatus, error) {
+                        alert("Failed to submit : " + errorTextStatus + " ;" + error + "value string :" + id_value_string);
+                    },
+                    success: function (data) {
+                        console.log('it responds from the success_line')
+                        // Clear all options from course select
+                        $("select#transaction_enrolled_session_id option").remove();
+                        //put in a empty default line
+                        var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+                        $(row).appendTo("select#transaction_enrolled_session_id");
+                        // Fill course select
+                        $.each(data, function (i, j) {
+                            console.log('i:' + i + ' ,j: ' + j)
+                            row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                            $(row).appendTo("select#transaction_enrolled_session_id");
+                        });
+                    }
+                });
+            }
+        });
+
     });
 
 });

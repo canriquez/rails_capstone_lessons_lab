@@ -1,10 +1,10 @@
-class NewGroupForm
+class NewTransactionForm
   include Capybara::DSL
 
   def visit_page
-    visit('/groups')
-    click_on('Add New Course')
-    self # so we can chain our mesagges
+    visit('/transactions')
+    click_on('Add New Booking')
+    self
   end
 
   def fill_in_with(params = {})

@@ -54,7 +54,7 @@ class GroupsController < ApplicationController
       format.js
     end
   end
-
+  
   private
 
   def group_course_params
