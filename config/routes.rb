@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :groups # here we create the resource course(group)
-  resources :transactions, only: [ :index, :new ]
+  resources :transactions, only: [ :index, :new, :create ]
 
   get 'enrolled/:id', to: 'enrolled#enrolled'
 

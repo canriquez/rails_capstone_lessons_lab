@@ -8,7 +8,7 @@ class NewTransactionForm
   end
 
   def fill_in_with(params = {})
-    fill_in('Course Name', with: params.fetch(:name, 'Course 1'))
+    fill_in('Select Course', with: params.fetch(:name, 'Course 1'))
     fill_in('Description', with: 'this is a dummy description for testing purposes only')
     select('45', from: 'Duration')
     fill_in('Price', with: 'Price')

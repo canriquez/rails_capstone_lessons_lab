@@ -1,9 +1,11 @@
 class EnrolledController < ApplicationController
 
     def enrolled
-      @enrolled = User.select("users.name as name, enrolls.id as id").
+      @enrolled = User.select("users.name as name, users.id as id").
                   joins(:enrolled_courses).
-                  where(id: Group.find(enrolled_params[:id]).enrollments)
+                  where(id: Group.find(enrolled_params[:id]).enrollments).to_a
+      #@enrolled = User.all
+      p @enrolled
 
       respond_to do |format|
         format.json { render :json => @enrolled}

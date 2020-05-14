@@ -1,0 +1,56 @@
+<% @transaction.enabled.each do |booking| %>
+  <div data-turbolinks="false" id="booking-<%= booking.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
+    <div class="card-header bg-transparent">
+      <div class="media d-flex justify-content-between">
+          <div class="header-left d-flex">
+            <%= image_tag("ielts_cover_image.jpeg", size: "56x30", alt: "Edit Entry") %>
+            <div class="media-body">
+                <h5 class="mt-1 ml-4"><%= course.name %></h5>
+            </div>
+          </div>
+          <div class="header-right">
+            <small class="text-muted">Course started: <%= course.starting %></small>
+            <button id="sw-<%= course.id %>" type="button" class="course-on-btn shadows btn sw">
+              <%= svg('switch') %>
+            </button>
+          </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">Course description</h5>
+      <p class="card-text"><%= course.description %></p>                                      
+    </div>
+    <div class="card-footer bg-transparent d-flex justify-content-between">
+      <div class="ft-left">
+        <button type="button" class="more-info-btn btn">
+          Lessons given <span class="badge badge-light">98</span>
+        </button>
+        <button type="button" class="more-info-btn btn">
+          Students enrolled <span class="badge badge-light">26</span>
+        </button>
+      </div>
+      <div class="ft-right">
+
+        <button value="view" name="view" type="button" class="view shadows icon-btn btn">
+         <%= link_to group_path(course) do %>
+          <%= svg('view') %>
+          <% end %>
+        </button>
+
+        <button value="edit" name="edit" type="button" class="edit shadows icon-btn btn">
+         <%= link_to edit_group_path(course) do %>
+          <%= svg('edit') %>
+          <% end %>
+        </button>
+
+        <button type="button" class="shadows icon-btn btn">
+
+        <%= link_to confirm_destroy_group_path(course), data: { remote: true }, class: "delete" do %>
+          <%= svg('trash_can') %>
+          <% end %>
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <% end %>
