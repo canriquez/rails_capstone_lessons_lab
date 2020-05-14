@@ -165,28 +165,26 @@ describe GroupsController do
     end
 
     context "and teacher is not the owner of the course" do
+      let(:course_2) { FactoryBot.create(:group_enabled, name: 'teacher 2 course', author: teacher_2) }
+      let(:valid_course_change) { FactoryBot.attributes_for(:group_enabled, name: 'teacher 1 edit', author: teacher_1) }
 
       describe 'GET course edit' do
-        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
-        it 'fails to render :edit template redirects to course index' do
-          get :edit, params: { id: valid_group_course }
+        it 'fails to render :edit template as teacher 1 is not the owner of the current course redirects to course index' do
+          get :edit, params: { id: course_2 }
           expect(response).to redirect_to(groups_path)
         end
       end
   
       describe 'PUT request to update course' do
-        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
-        let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
         it 'fails to PUT a change on the course record redirects to course index' do
-          put :update, params: { id: valid_group_course, group: valid_course_data_change }
+          put :update, params: { id: course_2, group: valid_course_change }
           expect(response).to redirect_to(groups_path)
         end
       end
   
       describe 'DELETE request to destroy a course record' do
-        let(:valid_group_course) { FactoryBot.create(:group, author: another_teacher_user) }
         it 'fails to destroy a course record redirects to course index' do
-          delete :destroy, params: { id: valid_group_course }
+          delete :destroy, params: { id: course_2 }
           expect(response).to redirect_to(groups_path)
         end
       end
@@ -194,45 +192,46 @@ describe GroupsController do
     end
     
     context "teacher is the owner of the course" do
-      let(:enabled_group_course) { FactoryBot.create(:group_enabled, author: teacher_user) }
+      let(:valid_course_data) { FactoryBot.create(:group_enabled, author: teacher_1) }
+
       describe 'GET edit' do    
-        it 'renders :edit template' do
-          get :edit, params: { id: enabled_group_course }
+        it 'renders :edit template to valid course author' do
+          get :edit, params: { id: valid_course_data }
           expect(response).to render_template(:edit)
         end
         it 'assigns the requested group/course to the view' do
-          get :edit, params: { id: enabled_group_course }
-          expect(assigns(:group)).to eq(enabled_group_course)
+          get :edit, params: { id: valid_course_data }
+          expect(assigns(:group)).to eq(valid_course_data)
         end
       end
     
       describe 'PUT update action with ' do
-        # we first create the grou/course we will test by updating with valid and invalid data.  
-        context 'valid data for enabled group/course' do
-          let(:valid_course_data_change) { FactoryBot.attributes_for(:group_enabled, name: 'Course name update') }
-    
+        # we first create the group/course we will test by updating with valid and invalid data.  
+        let(:valid_course) { FactoryBot.create(:group, name: 'teacher-1 course', author: teacher_1) }
+        let(:invalid_course_data_change) { FactoryBot.attributes_for(:group, name: nil, author: teacher_1) }
+        let(:valid_course_data_change) { FactoryBot.attributes_for(:group, name: 'best teacher-1 course', author: teacher_1) }
+
+        context 'valid data for enabled group/course' do    
           it 'redirects to groups#show action' do
-            put :update, params: { id: enabled_group_course, group: valid_course_data_change }
-            expect(response).to_not redirect_to(enabled_group_course)
+            put :update, params: { id: valid_course, group: valid_course_data_change }
+            expect(response).to redirect_to(groups_path)
           end
           it 'updates group/course changes in the database' do
-            put :update, params: { id: enabled_group_course, group: valid_course_data_change }
-            enabled_group_course.reload # I reload DB record to fetch new object changes
-            expect(enabled_group_course.name).to eq('Course name update') # I check directly in the DB (integration test)
+            put :update, params: { id: valid_course, group: valid_course_data_change }
+            valid_course.reload # I reload DB record to fetch new object changes
+            expect(valid_course.name).to eq('best teacher-1 course') # I check directly in the DB (integration test)
           end
         end
     
-        context 'invalid data with enabled group/course' do
-          let(:invalid_course_data_change) { FactoryBot.attributes_for(:group, name: nil) }
-    
+        context 'invalid data change with enabled group/course' do
           it 'renders :edit view template' do
-            put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
+            put :update, params: { id: valid_course, group: invalid_course_data_change }
             expect(response).to render_template(:edit)
           end
           it 'fails to update the group/course changes in the DB' do
-            put :update, params: { id: enabled_group_course, group: invalid_course_data_change }
-            enabled_group_course.reload # I reload DB record to fetch new object changes
-            expect(enabled_group_course.name).not_to eq('Course name update')
+            put :update, params: { id: valid_course, group: invalid_course_data_change }
+            valid_course.reload # I reload DB record to fetch new object changes
+            expect(valid_course.name).not_to eq('best teacher-1 course')
             # I check directly in the DB (integration test)
           end
         end
@@ -241,12 +240,12 @@ describe GroupsController do
       describe 'DELETE action to destroy' do
         # we first create the grou/course we will test by destroying.
         it 'not to redirect to groups/courses index as AJAX is in use' do
-          delete :destroy, params: { id: enabled_group_course }
+          delete :destroy, params: { id: valid_course_data }
           expect(response).to redirect_to(groups_path)
         end
         it 'deletes group/course from database' do
-          delete :destroy, params: { id: enabled_group_course }
-          expect(Group.exists?(enabled_group_course.id)).to be_falsy
+          delete :destroy, params: { id: valid_course_data }
+          expect(Group.exists?(valid_course_data.id)).to be_falsy
         end
       end
     end

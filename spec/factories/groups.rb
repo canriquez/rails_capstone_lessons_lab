@@ -9,7 +9,7 @@ FactoryBot.define do
     online { true }
     presencial { true }
     enabled { true }
-    author { 1 }
+    author_id { 1 }
 
     factory :group_enabled do
       enabled { true }
