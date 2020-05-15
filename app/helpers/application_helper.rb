@@ -6,7 +6,7 @@ module ApplicationHelper
     c_options
   end
 
-  def authored_course_options
+  def session_duration_options
     options = (1..8).map { |num| [(num * 15).to_s + ' min', num * 15] }
     options
   end
@@ -26,6 +26,33 @@ module ApplicationHelper
   end
 
   def to_date(record)
-    (Date.parse(record).strftime("%d/%m/%Y %H:%M")).html_safe
+    (Date.parse(record).strftime("%d/%m/%Y")).html_safe
   end
+
+  def status_tag(val)
+    if val == "generated"
+      tag = '<p class="mt-0 mb-0 d-flex justify-content-between align-items-center">'
+      tag += '<span class="badge badge-pill badge-light">' 
+      tag += val
+      tag += '</span>'
+      tag +='<span class="course-off-btn">'
+      tag += svg('check')
+      tag += '</span><p>'
+    else
+      tag = '<p class="mt-0 mb-0 d-flex justify-content-between align-items-center">'
+      tag += '<span class="badge badge-pill badge-light mt-0 mb-0">' 
+      tag += val
+      tag += ' by student</span>'
+      tag +='<span class="course-on-btn mt-0 mb-0">'
+      tag += svg('check')
+      tag += '</span><p>'
+    end  
+    tag.html_safe
+  end
+
+  def safe_puts(field)
+    return '' if field.nil?
+    field
+  end
+
 end

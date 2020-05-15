@@ -1,24 +1,26 @@
+
 <%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-btn-primary" %>
 
 <div class="card">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
     <li class="nav-item">
-        <a id="enabled-tab"  data-turbolinks="false" class="nav-link active" href="">Total Billable Bookings (<span class="ena-course">Fake:22</span>)</a>
+        <a id="enabled-tab"  data-turbolinks="false" 
+        class="nav-link active" 
+        href="">Total Billable Bookings (<span class="ena-course"><%= @transactions.count(:id) %></span>)</a>
       </li>
       <li class="nav-item">
-        <a id="enabled-tab"  data-turbolinks="false" class="nav-link" href="">Pending Billable Bookings (<span class="ena-course">Fake:11</span>)</a>
-      </li>
-      <li class="nav-item">
-        <a id="disabled-tab"  data-turbolinks="false" class="nav-link" href="">Accepted Billable Bookings  (<span class="dis-course">Fake:11</span>)</a>
+        <a id="disabled-tab"  data-turbolinks="false" 
+        class="nav-link" 
+        href="">Total non-Billable Bookings (<span class="dis-course"><%= @tran_not_billable.not_billable.count(:id) %></span>)</a>
       </li>
     </ul>
   </div>
-  <div id="accepted-bb" class="enabled">
-    <%= render 'layouts/accepted_bookings' %>
+  <div id="billable-bb" class="enabled">
+    <%= render 'layouts/billable_bookings' %>
   </div>
-  <div id="pending-bb" class="enabled">
-    <%= render 'layouts/pending_bookings' %>
+    <div id="non-billable-bb" class="disabled">
+    <%= render 'layouts/non_billable_bookings' %>
   </div>
 </div>
  

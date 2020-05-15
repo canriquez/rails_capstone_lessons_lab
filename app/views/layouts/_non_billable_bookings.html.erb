@@ -1,0 +1,36 @@
+  <div class="card">
+    <div class="card-body">
+      <span>Total non-Billable Booked hours: <%= @tran_not_billable.sum(:minutes)/60 %></span> | 
+    </div>
+  </div>
+   <% @tran_not_billable.each do |booking| %>
+  <div data-turbolinks="false" id="booking-<%= booking.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
+    <div class="card-header bg-transparent">
+      <div class="media d-flex justify-content-between">
+          <div class="header-left d-flex">
+          <p>Non-Billable Booking</p>
+            <div class="media-body"></div>
+          </div>
+          <div class="header-right">
+            <small class="text-muted">Booking date: <%= booking.created_at %></small>
+          </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="mt-0 mb-0"><%= booking.minutes %> min</p>
+        <p class="mt-0 mb-0">0.00 usd</p>
+        <p class="text-muted mt-0 mb-0"><%=  booking.status%></p>
+      </div>
+    </div>
+    <div class="card-footer bg-transparent d-flex justify-content-end">
+
+        <button type="button" class="shadows icon-btn btn">
+
+        <%= link_to confirm_destroy_transaction_path(booking), data: { remote: true }, class: "delete" do %>
+          <%= svg('trash_can') %>
+          <% end %>
+        </button>
+    </div>
+  </div>
+  <% end %>

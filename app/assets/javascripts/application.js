@@ -48,6 +48,32 @@ $(document).on('turbolinks:load', function () {
         });
     });
 
+    /* Handling transactions#index bookings display */
+
+    $(function () {
+        $("#enabled-tab").click(function (r) {
+            r.preventDefault();
+            console.log('hey, SOmeone clicked enabled tab')
+            $('#billable-bb').removeClass('disabled');
+            $('#billable-bb').addClass('enabled');
+            $('#non-billable-bb').removeClass('enabled');
+            $('#non-billable-bb').addClass('disabled');
+            $('#disabled-tab').removeClass('active')
+            $('#enabled-tab').addClass('active')
+        });
+
+        $("#disabled-tab").click(function (r) {
+            r.preventDefault();
+            console.log('hey, SOmeone clicked disabled tab')
+            $('#billable-bb').removeClass('enabled');
+            $('#billable-bb').addClass('disabled');
+            $('#non-billable-bb').removeClass('disabled');
+            $('#non-billable-bb').addClass('enabled');
+            $('#enabled-tab').removeClass('active')
+            $('#disabled-tab').addClass('active')
+        });
+    });
+
 
     // Method to enable/disable courses in the groups#index page
 
@@ -118,6 +144,32 @@ $(document).on('turbolinks:load', function () {
 
                     }
                 });
+            }
+        });
+
+    });
+
+    //Disable/enable billable/non-billable option on Transaction new form
+
+    $(function () {
+
+        //clean the enrolled student option on page load and touch (this is specially helpful if teacher change courses)
+        if ($("select#inputBillableGroup").val() == "1") {
+            $("select#transaction_course_taught_id").prop("disabled", false);
+            $("select#transaction_sitting_student_id").prop("disabled", false);
+        }
+
+        $("select#inputBillableGroup").change(function () {
+            var id_value_string = $(this).val();
+            console.log('id_value_string_is :' + id_value_string)
+            if (id_value_string == "2") {
+                $("select#transaction_course_taught_id").prop("disabled", true);
+                $("select#transaction_sitting_student_id").prop("disabled", true);
+            } else {
+                $("select#transaction_course_taught_id").val = '';
+                $("select#transaction_sitting_student_id").val = '';
+                $("select#transaction_course_taught_id").prop("disabled", false);
+                $("select#transaction_sitting_student_id").prop("disabled", false);
             }
         });
 

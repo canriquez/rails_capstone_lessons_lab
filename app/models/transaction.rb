@@ -6,5 +6,6 @@ class Transaction < ApplicationRecord
     enum status: [ :generated, :accepted ]
 
     scope :order_by_most_recent, -> { order(created_at: :desc) }
+    scope :not_billable, -> { where(course_taught_id: [nil, ""])}
 
 end

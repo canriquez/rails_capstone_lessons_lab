@@ -1,3 +1,30 @@
-<div class="container">
-<h5>here we are</h5>
+<div class="base-backgound">
+  <div class="main-style container">
+  <ul class="list-group">
+    <li class="list-group-item d-flex flex-column justify-content-center align-items-center">
+      <div class="pt-5 pb-5"> <img src="" alt="user image"></div>
+      <span class="d-flex align-items-center badge badge-warning"><%= current_user.role %></span>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      Bookings
+      <button value="edit" name="edit" type="button" class=" main-link-icon">
+          <%= link_to transactions_path do %>
+            <%= svg('bookings') %>
+            <% end %>
+          </button>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+    All Courses
+      <button value="edit" name="edit" type="button" class=" main-link-icon">
+          <%= link_to groups_path do %>
+            <%= svg('courses') %>
+            <% end %>
+          </button>
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      All Students
+      <span class="badge badge-primary badge-pill">1</span>
+    </li>
+  </ul>
+  </div>
 </div>

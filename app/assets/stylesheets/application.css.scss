@@ -41,20 +41,49 @@
 $main: #3778c2;
 $second: #5fb523;
 $text: #434b54;
+$icons_off: #d8d8d8;
+$icons_on: #5fb523;
 
 body {
-    //background: $main;
+    background: $main;
     font-family: ProximaReg;
+
 }
 
 //***************************
 //**      GENERIC         ***
 //***************************
 
+//Class impacting welcome list menu
+.main-style {
+    background: none;
+    border: none;
+    font-family: ProximaReg;
+    color: #fff
+}
+
+.list-group-item {
+    background: $main;
+    font-size: 1.5rem;
+}
+
 .shadows {
     -webkit-box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
     -moz-box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
     box-shadow: -1px 0px 11px -1px rgba(0, 0, 0, 0.17);
+}
+
+.small-text {
+    font-family: ProximaReg;
+    font-size: 0.7rem;
+    backgroud: $second;
+}
+
+
+.user-name {
+    font-family: ProximaReg;
+    font-size: 1.1rem;
+    backgroud: $second;
 }
 
 
@@ -94,11 +123,29 @@ body {
     color: #fff;
     position: relative;
 
+    a {
+        text-decoration: none;
+        color: white;
+    }
+
+
     #app-title {
+        color: #fff !important;
+        text-decoration: none;
         font-family: ProximaBold;
         font-weight: 600;
-        font-size: 1.5em;
+        font-size: 2em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
+
+    #app-title:hover {
+        color: white;
+        text-decoration: none;
+    }
+
 }
 
 // Burger icon
@@ -138,6 +185,11 @@ body {
 }
 
 // Pesonalised buttons
+
+#sign-out-button {
+    background: $second !important;
+}
+
 .more-info-btn {
     color: #fff;
     background-color: $main;
@@ -154,6 +206,16 @@ body {
     }
 }
 
+.main-link-icon {
+    padding: 1px 6px;
+
+    svg {
+        fill: #fff;
+        margin-top: 6px;
+        width: 100%
+    }
+}
+
 .card-footer {
     display: flex;
     align-items: center;
@@ -164,7 +226,16 @@ body {
     padding: 1px 6px;
 
     svg {
-        fill: $second;
+        fill: $icons_on;
+        margin-top: 6px;
+    }
+}
+
+.course-off-btn {
+    padding: 1px 6px;
+
+    svg {
+        fill: $icons_off;
         margin-top: 6px;
     }
 }

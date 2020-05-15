@@ -1,0 +1,19 @@
+console.log('deletete booking was initiated')
+$('#confirmation_tran').html("<%= j (render 'layouts/conf_tran_del') %>");
+$('#confirmation_tran').css("display", "block");
+$('#confirm_deletion_tran').modal('show');
+$('#confirm_deletion_tran').slideDown(350);
+
+ $("#delete-action_tran").click(function()
+{
+    console.log('delete button was clicked')
+    $('#course-<%=@transaction.id%>').hide(500);
+    $('#confirm_deletion_tran').modal('hide');
+
+    $.ajax('/transactions/<%=@transaction.id%>', 
+        { type: 'DELETE', 
+            data: { _method: 'DELETE' },
+            data: { authenticity_token: $('[name="csrf-token"]')[0].content} 
+        });
+
+});
