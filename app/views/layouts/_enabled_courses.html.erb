@@ -26,8 +26,14 @@
           Lessons given <span class="badge badge-light">98</span>
         </button>
         <button type="button" class="more-info-btn btn">
-          Students enrolled <span class="badge badge-light">26</span>
+          Students <span class="badge badge-light">26</span>
         </button>
+        <button value="edit" name="edit" type="button" class="edit shadows icon-btn btn" title="Enroll a new student">
+         <%= link_to new_enroll_path(course) do %>
+          <%= svg('enroll') %>
+          <% end %>
+        </button>
+
       </div>
       <div class="ft-right">
 

@@ -1,4 +1,12 @@
 module ApplicationHelper
+
+  def roles_options
+    rt = User.roles.map { |k, _v| [k.split('_').first.capitalize, k] }
+    # puts "look here"
+    # p rt
+    rt
+  end
+
   def auth_course_options
     course_options = Group.select("name as course_name, id as course_taught_id").
                      where(id: current_user.authored_courses)
