@@ -5,21 +5,21 @@ This web application is a mobile application targeting freelance teachers to adm
 . The front is based the original design idea by [Gregoire Vella on Behance ](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=).
 
 
-![screenshot](/assets/img/app_screenshot.png)
+![screenshot](app_screenshot.png)
 
 ## Live App link
 
-[heroku live site](https://pure-coast-26349.herokuapp.com/)
+[heroku live site](https://shrouded-plains-92148.herokuapp.com/)
 
 ## Customer Story
 
-	- The user logs in to the app, only by typing the username
+	- The user logs in to the app, only by typing the email
 		. Additional feature implemented: password is an additional feature (demo password: password)
 		
 	3. The logged-in user is presented with a profile page that includes:
-		a. My billable bookings ("all my transactions")
-		b. My non-billable bookings ("all my external transactions)
-		c. All Courses
+		a. Bookings ("all my transactions")
+			- Inside bookings two taps hell to show  
+		b. All Course 
 		d. Additional feature: All students
 
 	4. When logged-in user opens "My billable bookings" page
@@ -41,9 +41,7 @@ This web application is a mobile application targeting freelance teachers to adm
 		a. A list of all courses is displayed in alphabetical order.
 			
 		b. Each course display its icon, name and record creation date.
-			i. Additional feature: Total lessons given so far
-		
-		c. Each course is clickable and opens "course transactions" page.
+
 	
 	7. When logged-in user opens the "Course transactions" page:
 		a. A list of all transactions that belong to that course are displayed.
@@ -62,7 +60,7 @@ This web application is a mobile application targeting freelance teachers to adm
 			
 	10. Additional feature: Signing up students to courses:
 		a. Only a professor can enroll students in a  courses.
-		b. Sign-up student button will be available only on the "course transactions page"
+		b. Sign-up student button is available only on the "course transactions page"
 		c. "add a new transaction" will be shown on the "course transaction page"
 			i. Transaction can be created only for students signed up into the course.
 			
