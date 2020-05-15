@@ -5,7 +5,7 @@ This web application is a mobile application targeting freelance teachers to adm
 . The front is based the original design idea by [Gregoire Vella on Behance ](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=).
 
 
-![screenshot](assets/img/app_screenshot.png)
+![screenshot](/assets/img/app_screenshot.png)
 
 ## Live App link
 

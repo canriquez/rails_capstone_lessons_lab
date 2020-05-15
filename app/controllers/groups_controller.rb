@@ -1,20 +1,17 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [ :index, :show, :new, :create, :edit, :update, :destroy ]
-  before_action :authors_only, only: [ :edit, :update, :destroy, :confirm_destroy ]
-  before_action :authors_or_enrolled_only, only: [ :show ]
-  before_action :teachers_only, only: [ :new, :create]
-
+  before_action :authenticate_user!, only: %i[index show new create edit update destroy]
+  before_action :authors_only, only: %i[edit update destroy confirm_destroy]
+  before_action :authors_or_enrolled_only, only: [:show]
+  before_action :teachers_only, only: %i[new create]
 
   def index
     @group = Group.authored_courses(current_user)
     @student_courses = Group.enrolled_courses(current_user)
-
   end
 
   def show
     @group = Group.find(params[:id])
   end
-
 
   def new
     @group = Group.new
@@ -22,7 +19,7 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_course_params)
-    @group.author_id = current_user.id  #It is required only in testing.
+    @group.author_id = current_user.id # It is required only in testing.
     if @group.save
       redirect_to groups_path, notice: "Course #{@group.name} has been created"
       # I redirect to the index of courses by design instead of tipically redirect to the new created course
@@ -31,8 +28,7 @@ class GroupsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     if @group.update_attributes(group_course_params) # if we succeed to update
@@ -45,7 +41,7 @@ class GroupsController < ApplicationController
   def destroy
     puts 'WE GET TO DESTROY'
     @course.destroy
-    redirect_to groups_path, notice: "Course #{@course.name } was  eliminated."
+    redirect_to groups_path, notice: "Course #{@course.name} was  eliminated."
   end
 
   def confirm_destroy
@@ -54,7 +50,7 @@ class GroupsController < ApplicationController
       format.js
     end
   end
-  
+
   private
 
   def group_course_params
@@ -66,24 +62,20 @@ class GroupsController < ApplicationController
   def authors_only
     @group = Group.find(params[:id])
     @course = @group
-    if current_user != @group.author 
-      redirect_to groups_path
-    end
+    redirect_to groups_path if current_user != @group.author
   end
 
   def authors_or_enrolled_only
     @group = Group.find(params[:id])
     return if current_user == @group.author || current_user.enrolled(@group)
-    
+
     redirect_to groups_paths, notice: 'you are not authorised for this action'
   end
 
   def teachers_only
     return if current_user.role != 'student'
+
     puts 'WARNING TEACHERS ONLY FAILED'
     redirect_to groups_path, notice: 'you are not authorised for this action'
-
   end
-
-
 end

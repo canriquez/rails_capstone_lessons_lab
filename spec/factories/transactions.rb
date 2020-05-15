@@ -12,6 +12,5 @@ FactoryBot.define do
     factory :non_billable do
       minutes { 15 }
     end
-
   end
 end

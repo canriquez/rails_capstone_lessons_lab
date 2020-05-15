@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   def roles_options
     rt = User.roles.map { |k, _v| [k.split('_').first.capitalize, k] }
     # puts "look here"
@@ -8,9 +7,9 @@ module ApplicationHelper
   end
 
   def auth_course_options
-    course_options = Group.select("name as course_name, id as course_taught_id").
-                     where(id: current_user.authored_courses)
-    c_options = course_options.map {|a| [a.course_name,a.course_taught_id] }
+    course_options = Group.select('name as course_name, id as course_taught_id')
+      .where(id: current_user.authored_courses)
+    c_options = course_options.map { |a| [a.course_name, a.course_taught_id] }
     c_options
   end
 
@@ -34,33 +33,27 @@ module ApplicationHelper
   end
 
   def to_date(record)
-    (Date.parse(record).strftime("%d/%m/%Y")).html_safe
+    Date.parse(record).strftime('%d/%m/%Y').html_safe
   end
 
   def status_tag(val)
-    if val == "generated"
-      tag = '<p class="mt-0 mb-0 d-flex justify-content-between align-items-center">'
-      tag += '<span class="badge badge-pill badge-light">' 
-      tag += val
+    tag = '<p class="mt-0 mb-0 d-flex justify-content-between align-items-center">'
+    tag += '<span class="badge badge-pill badge-light">'
+    tag += val
+    if val == 'generated'
       tag += '</span>'
-      tag +='<span class="course-off-btn">'
-      tag += svg('check')
-      tag += '</span><p>'
     else
-      tag = '<p class="mt-0 mb-0 d-flex justify-content-between align-items-center">'
-      tag += '<span class="badge badge-pill badge-light mt-0 mb-0">' 
-      tag += val
       tag += ' by student</span>'
-      tag +='<span class="course-on-btn mt-0 mb-0">'
-      tag += svg('check')
-      tag += '</span><p>'
-    end  
+      tag += '<span class="course-on-btn mt-0 mb-0">'
+    end
+    tag += svg('check')
+    tag += '</span><p>'
     tag.html_safe
   end
 
   def safe_puts(field)
     return '' if field.nil?
+
     field
   end
-
 end
