@@ -12,11 +12,14 @@ class EnrolledController < ApplicationController
       end
     end 
 
-    def to_enroll
-      @to_enroll =  User.where.not(id: User.joins(:enrolled_courses).
-      where(course_id: Group.find(enrolled_params[:id]).enrollments)))
+    def enrolar
+      @to_enroll =  User.select("users.id, users.name").
+      where.not(id: Enroll.select("student_id as id").
+      joins(:student).where(course: Group.find(enrolled_params[:id]).enrollments)).to_a
+
+      p @to_enroll
       respond_to do |format|
-        format.json { render :json => @enrolled}
+        format.json { render :json => @to_enroll}
       end
     end
 

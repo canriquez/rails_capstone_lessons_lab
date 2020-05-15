@@ -7,11 +7,12 @@ Rails.application.routes.draw do
 
   resources :groups # here we create the resource course(group)
   resources :transactions, only: [ :index, :new, :create, :edit, :delete, :destroy  ]
+ 
 
   get 'enrolled/:id', to: 'enrolled#enrolled'
-  get 'to_enroll/:id', to: 'to_enroll#enrolled'
+  get 'enrolar/:id', to: 'enrolled#enrolar'
   
-  resources :enrolls, only: [ :new, :create ]
+  resources :enrolls, only: [ :update ]
 
   
   resources :transactions do

@@ -149,6 +149,86 @@ $(document).on('turbolinks:load', function () {
 
     });
 
+    //************* Dynamic select box populator for not_enrolled in students ***********
+
+    $(document).ready(function () {
+        // Populates selector to add new enrolled student to course (not previously enrolled in that course)
+        $(document).on('click', function (event) {
+            console.log("click detected")
+            console.log('Yep, finding the click' + $(event.currentTarget))
+
+            if ($(event.target).hasClass('enroll')) {
+                var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
+                console.log('we click on a enroll - selector :' + id_value_string)
+
+                // Send the request and update course dropdown
+                Rails.ajax({
+                    url: '/enrolar/' + id_value_string,
+                    type: "GET",
+                    error: function (XMLHttpRequest, errorTextStatus, error) {
+                        alert("Failed to submit : " + errorTextStatus + " ;" + error + "value string :" + id_value_string);
+                    },
+                    success: function (data) {
+                        console.log('it responds from the success_line')
+                        // Clear all options from course select
+                        var string_selector = "select#abc-" + id_value_string + " option"
+                        $(string_selector).remove();
+                        //put in a empty default line
+                        var row = "<option value=\"" + "" + "\">" + "" + "</option>";
+                        $(row).appendTo("select#abc-" + id_value_string);
+                        // Fill course select
+                        myArray = []
+                        $.each(data, function (i, j) {
+                            row = "<option value=\"" + j.id + "\">" + j.name + "</option>";
+                            console.log(row)
+                            $(row).appendTo("select#abc-" + id_value_string);
+                        });
+
+                    }
+                });
+            } else {
+                console.log('Not catching the class enroll')
+            }
+        });
+
+        // Catched the add student button and fires up the PUT update enrolls action 
+
+        $(document).on('click', function (event) {
+            console.log("click on add button detected")
+
+            if ($(event.target).hasClass('add-student')) {
+                var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
+                console.log('we click on a ADD student  - selector :' + id_value_string)
+
+                console.log("student_id :" + $("select#abc-" + id_value_string).val());
+                var student_id = $("select#abc-" + id_value_string).val()
+                if (student_id != "" && student_id != "Choose...") {
+                    console.log("we have a correct value")
+
+                    // Send the request and update course dropdown
+                    Rails.ajax({
+                        url: '/enrolls/' + id_value_string,
+                        type: "PATCH",
+                        data: 'student_id=' + student_id + '&course_id=' + id_value_string,
+                        error: function (XMLHttpRequest, errorTextStatus, error) {
+                            alert("Failed to submit : " + errorTextStatus + " ;" + error + "value string :" + id_value_string);
+                        },
+                        success: function (data) {
+                            console.log('it responds from the success_line')
+                        }
+                    });
+                };
+            } else {
+                console.log('Not catching the class add-student')
+            }
+        });
+
+
+
+
+    });
+
+
     //Disable/enable billable/non-billable option on Transaction new form
 
     $(function () {
