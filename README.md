@@ -1,57 +1,59 @@
-# Project Name
+# Lessons Lab
 
-> One paragraph statement about the project.
+This web application is a helps freelance teachers to admin track and manage their lessons with their students.
+. The front is based the original design idea by [Gregoire Vella on Behance ](https://www.behance.net/gallery/19759151/Snapscan-iOs-design-and-branding?tracking_source=).
 
-![screenshot](./app_screenshot.png)
 
-Additional description about the project and its features.
+![screenshot](assets/img/app_screenshot.png)
+
+## Live App link
+
+[heroku live site](https://pure-coast-26349.herokuapp.com/)
+
+## Environment set up requirements
+
+To run this project, you need ruby installed in your environment
+Run the following command:
+
+```
+$ ruby -v
+```
+
+You should have a result similar to this:
+s
+```
+ruby 2.6.5p114 (2019-10-01 revision 67812) [x86_64-linux]
+```
+
+If you don't get that result, follow this [link](https://www.ruby-lang.org/en/documentation/installation/) and install Ruby in your local environment.
+
+### Setup
+- Clone this repository in your local environment
+- Located on the root of repository execute 
+
+```bundle install``` 
+ 
+This action will install all the required dependencies. 
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
-
-## Live Demo
-
-[Live Demo Link](https://livedemo.com)
-
-
-## Getting Started
-
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+- Ruby
+- Ruby on Rails
+- bootstrap
 
 ## Authors
 
-👤 **Author1**
+👤 **HADDAD SOHAIB**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@HADDADSOHAIB](https://github.com/HADDADSOHAIB)
+- Twitter: [@HaddadSohaib](https://twitter.com/HaddadSohaib)
+- Linkedin: [linkedin](https://www.linkedin.com/in/sohaibhaddad/)
 
-👤 **Author2**
+👤 Carlos Anriquez
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@canriquez](https://github.com/canriquez)
+- Twitter: [@cranriquez](https://twitter.com/cranriquez)
+- Linkedin: [linkedin](https://www.linkedin.com/in/carlosanriquez/)
 
 ## 🤝 Contributing
 
@@ -62,13 +64,3 @@ Feel free to check the [issues page](issues/).
 ## Show your support
 
 Give a ⭐️ if you like this project!
-
-## Acknowledgments
-
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
-
-## 📝 License
-
-This project is [MIT](lic.url) licensed.
