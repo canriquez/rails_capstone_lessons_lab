@@ -4,7 +4,7 @@ class CreateEnrolls < ActiveRecord::Migration[5.2]
       t.integer :student_id
       t.integer :course_id
       add_foreign_key :enrolls, :users, column: :student_id, primary_key: "id"
-      add_foreign_key :enrolls, :ugroups, column: :course_id, primary_key: "id"
+      add_foreign_key :enrolls, :groups, column: :course_id, primary_key: "id"
 
       t.timestamps
     end
