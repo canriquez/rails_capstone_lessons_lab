@@ -43,12 +43,6 @@ This action will install all the required dependencies.
 
 ## Authors
 
-👤 **HADDAD SOHAIB**
-
-- Github: [@HADDADSOHAIB](https://github.com/HADDADSOHAIB)
-- Twitter: [@HaddadSohaib](https://twitter.com/HaddadSohaib)
-- Linkedin: [linkedin](https://www.linkedin.com/in/sohaibhaddad/)
-
 👤 Carlos Anriquez
 
 - Github: [@canriquez](https://github.com/canriquez)
