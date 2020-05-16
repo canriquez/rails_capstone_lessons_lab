@@ -33,7 +33,7 @@ module ApplicationHelper
   end
 
   def to_date(record)
-    Date.parse(record).strftime('%d/%m/%Y').html_safe
+    Date.parse(record)
   end
 
   def status_tag(val)
