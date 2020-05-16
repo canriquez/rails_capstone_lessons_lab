@@ -97,4 +97,8 @@ Rails.application.configure do
   # Must include to get inline SVGs to work in deploy
   config.assets.css_compressor = :scss
 
+  #Fix to enable img usage @ heroku
+  config.assets.compile = true
+  config.assets.digest = true
+
 end
