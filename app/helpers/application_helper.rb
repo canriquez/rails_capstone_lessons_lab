@@ -1,4 +1,5 @@
 module ApplicationHelper
+  require 'date'
   def roles_options
     rt = User.roles.map { |k, _v| [k.split('_').first.capitalize, k] }
     # puts "look here"
@@ -33,7 +34,10 @@ module ApplicationHelper
   end
 
   def to_date(record)
-    Date.parse(record)
+    #parsed_time = DateTime.strptime(record.to_s[0..18], '%Y/%m/%d %H:%M:%S')
+    #parsed_time.to_s
+    record.to_s[0..18]
+    
   end
 
   def status_tag(val)
