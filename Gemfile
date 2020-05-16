@@ -46,7 +46,7 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
-  gem 'factory_bot', '~> 5.2', required: false
+  gem 'factory_bot', '~> 5.2', require: false
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
