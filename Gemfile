@@ -23,7 +23,7 @@ gem 'simple_form', '~> 5.0', '>= 5.0.2'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
-  gem 'factory_bot_rails'
+  gem 'factory_bot', '~> 5.2'
   gem 'hirb'
   gem 'jsonapi-rb', '~> 0.5.0'
   gem 'rspec-rails', '~> 4.0'
@@ -46,6 +46,7 @@ end
 
 group :production do
   gem 'pg', '0.20.0'
+  gem 'factory_bot', '~> 5.2', required: false
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
