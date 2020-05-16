@@ -47,6 +47,7 @@ end
 group :production do
   gem 'pg', '0.20.0'
   gem 'factory_bot_rails', '~> 5.2', require: false
+  gem 'hirb'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
