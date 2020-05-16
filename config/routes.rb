@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'enrolled/:id', to: 'enrolled#enrolled'
   get 'enrolar/:id', to: 'enrolled#enrolar'
   
-  resources :enrolls, only: [ :update ]
+  resources :enrolls, only: [ :create, :show ]
 
   
   resources :transactions do

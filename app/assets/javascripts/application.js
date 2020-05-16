@@ -196,7 +196,8 @@ $(document).on('turbolinks:load', function () {
         $(document).on('click', function (event) {
             console.log("click on add button detected")
 
-            if ($(event.target).hasClass('add-student')) {
+            if ($(event.target).hasClass('add-student') && $(event.target).not('.working')) {
+                $(event.target).addClass('working');
                 var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
                 console.log('we click on a ADD student  - selector :' + id_value_string)
 
@@ -214,7 +215,9 @@ $(document).on('turbolinks:load', function () {
                             alert("Failed to submit : " + errorTextStatus + " ;" + error + "value string :" + id_value_string);
                         },
                         success: function (data) {
-                            console.log('it responds from the success_line')
+                            console.log('We successfully recorded enrolled :' + student_id + ':' + id_value_string)
+                            $(event.target).removeClass('working');
+
                         }
                     });
                 };
