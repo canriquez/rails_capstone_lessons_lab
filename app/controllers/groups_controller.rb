@@ -5,8 +5,11 @@ class GroupsController < ApplicationController
   before_action :teachers_only, only: %i[new create]
 
   def index
-    @group = Group.authored_courses(current_user)
-    @student_courses = Group.enrolled_courses(current_user)
+    if current_user.teacher?
+      @group = Group.authored_courses(current_user)
+    else
+      @group = Group.enrolled_courses(current_user)
+    end
   end
 
   def show
@@ -67,9 +70,9 @@ class GroupsController < ApplicationController
 
   def authors_or_enrolled_only
     @group = Group.find(params[:id])
-    return if current_user == @group.author || current_user.enrolled(@group)
+    return if current_user == @group.author || Enroll.already_enrolled(current_user, @group)
 
-    redirect_to groups_paths, notice: 'you are not authorised for this action'
+    redirect_to groups_path, notice: "you are not authorised for this action #{current_user.id}, #{@group.author}, #{current_user.enrolled(@group)}"
   end
 
   def teachers_only

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :enrolled_courses, foreign_key: 'student_id', class_name: 'Enroll'
   has_many :taught_sessions, foreign_key: 'teacher_id', class_name: 'Transaction'
   has_many :sitting_sessions, foreign_key: 'sitting_student_id', class_name: 'Transaction'
+  has_many :my_courses, through: :enrolled_courses, source: :course
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
@@ -10,6 +11,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   enum role: %i[student teacher]
+
+
+ 
 
   def enrolled(course)
     enrolled_courses.where(course_id: course).count.positive?

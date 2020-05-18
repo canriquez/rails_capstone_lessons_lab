@@ -8,5 +8,4 @@ class Enroll < ApplicationRecord
     Enroll.where(student_id: student).where(course_id: course).count
   end
 
-
 end

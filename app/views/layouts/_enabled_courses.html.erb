@@ -9,61 +9,63 @@
                  <input type="hidden" id="yup" name="yup" value="<%=course.id%>">
             </div>
           </div>
+          <% if current_user.teacher? %>
           <div class="header-right">
             <small class="text-muted">Course started: <%= course.starting %></small>
             <button id="sw-<%= course.id %>" type="button" class="course-on-btn shadows btn sw">
               <%= svg('switch') %>
             </button>
           </div>
+          <% end %>
       </div>
     </div>
     <div class="card-body">
       <h5 class="card-title">Course description</h5>
       <p class="card-text"><%= course.description %></p>                                      
-    </div>
-    <div class="card-footer bg-transparent d-flex justify-content-between">
-      <div class="ft-left">
-        <button type="button" class="more-info-btn btn">
-          Lessons given <span class="badge badge-light"><%= course.booked_sessions.count %></span>
-        </button>
-        <button type="button" class="more-info-btn btn">
-          Students <span class="badge badge-light"><%= course.enrollments.count %></span>
-        </button>
-        <button value="edit" name="edit" type="button" id="def-<%= course.id %>" class=" add-student edit shadows icon-btn btn" title="Enroll a new student">
-          <%= svg('enroll') %>
-        </button>
-        <div class="input-group mb-3">
-          <div class="input-group-prepend">
-            <label class="input-group-text" for="inputGroupSelect01">Student to enroll</label>
+    </div> 
+    <div class="card-footer bg-transparent d-flex <%= current_user.teacher? ? 'justify-content-between' : 'justify-content-end' %>">
+      <% if current_user.teacher? %>
+        <div class="ft-left">
+          <button type="button" class="more-info-btn btn">
+            Lessons given <span class="badge badge-light"><%= course.booked_sessions.count %></span>
+          </button>
+          <button type="button" class="more-info-btn btn">
+            Students <span class="badge badge-light"><%= course.enrollments.count %></span>
+          </button>
+          <button value="edit" name="edit" type="button" id="def-<%= course.id %>" class=" add-student edit shadows icon-btn btn" title="Enroll a new student">
+            <%= svg('enroll') %>
+          </button>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="inputGroupSelect01">Student to enroll</label>
+            </div>
+            <select class="custom-select enroll" id="abc-<%= course.id %>">
+              <option selected>Choose...</option>
+              <option value=""></option>
+            </select>
           </div>
-          <select class="custom-select enroll" id="abc-<%= course.id %>">
-            <option selected>Choose...</option>
-            <option value=""></option>
-          </select>
         </div>
-
-      </div>
+      <% end %>
       <div class="ft-right">
-
         <button value="view" name="view" type="button" class="view shadows icon-btn btn">
          <%= link_to group_path(course) do %>
           <%= svg('view') %>
           <% end %>
         </button>
+        <% if current_user.teacher? %>
+          <button value="edit" name="edit" type="button" class="edit shadows icon-btn btn">
+          <%= link_to edit_group_path(course) do %>
+            <%= svg('edit') %>
+            <% end %>
+          </button>
 
-        <button value="edit" name="edit" type="button" class="edit shadows icon-btn btn">
-         <%= link_to edit_group_path(course) do %>
-          <%= svg('edit') %>
-          <% end %>
-        </button>
+          <button type="button" class="shadows icon-btn btn">
 
-        <button type="button" class="shadows icon-btn btn">
-
-        <%= link_to confirm_destroy_group_path(course), data: { remote: true }, class: "delete" do %>
-          <%= svg('trash_can') %>
-          <% end %>
-        </button>
-
+          <%= link_to confirm_destroy_group_path(course), data: { remote: true }, class: "delete" do %>
+            <%= svg('trash_can') %>
+            <% end %>
+          </button>
+        <% end %>
       </div>
     </div>
   </div>

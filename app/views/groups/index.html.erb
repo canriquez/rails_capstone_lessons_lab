@@ -1,4 +1,4 @@
-<%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' %>
+<%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' unless current_user.student?%>
 <div class="capybara_wait"></div>
 
 <%= puts "I AM HERE IN GROUPS#INDEX" %>
@@ -8,9 +8,11 @@
       <li class="nav-item">
         <a id="enabled-tab"  data-turbolinks="false" class="nav-link active" href="">Active Courses (<span class="ena-course"><%= @group.enabled.count %></span>)</a>
       </li>
+      <% if current_user.teacher? %>
       <li class="nav-item">
         <a id="disabled-tab"  data-turbolinks="false" class="nav-link" href="">Disabled Courses (<span class="dis-course"><%= @group.disabled.count %></span>)</a>
       </li>
+      <% end %>
     </ul>
   </div>
   <div id="enabled-courses" class="enabled">
