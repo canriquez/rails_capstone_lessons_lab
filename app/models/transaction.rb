@@ -27,6 +27,16 @@ class Transaction < ApplicationRecord
       .where(teacher_id: current_user).order_by_most_recent
   end
 
+  def self.student_billable(user)
+    Transaction.select("transactions.id, transactions.created_at as date,
+      users.name as student_name, groups.name as course_name, transactions.status as status, 
+      transactions.minutes as minutes, groups.price as price, transactions.accdate as accepted_date").
+      joins(:sitting_student, :course_taught).
+      where(sitting_student: user)
+    end
+
+
+
   private
 
   def billable_course
@@ -39,6 +49,7 @@ class Transaction < ApplicationRecord
       errors.add(:course_taught_id, ": Please slect a course and student for billable bookings!") unless (course_taught_id != nil )
     end
   end
+
   def billable_student
     if booking_type == "billable"
       errors.add(:sitting_student_id, ": Please slect a course and student for billable bookings!") unless (sitting_student_id != nil )

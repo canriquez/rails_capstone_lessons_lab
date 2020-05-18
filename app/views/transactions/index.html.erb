@@ -1,5 +1,5 @@
 
-<%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-btn-primary" %>
+<%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-btn-primary" unless current_user.student? %>
 
 <div class="card">
   <div class="card-header">
@@ -9,18 +9,22 @@
         class="nav-link active" 
         href="">Total Billable Bookings (<span class="ena-course"><%= @transactions.count(:id) %></span>)</a>
       </li>
+      <% if current_user.teacher? %>
       <li class="nav-item">
         <a id="disabled-tab"  data-turbolinks="false" 
         class="nav-link" 
         href="">Total non-Billable Bookings (<span class="dis-course"><%= @tran_not_billable.not_billable.count(:id) %></span>)</a>
       </li>
+      <% end %>
     </ul>
   </div>
   <div id="billable-bb" class="enabled">
     <%= render 'layouts/billable_bookings' %>
   </div>
-    <div id="non-billable-bb" class="disabled">
+  <% if current_user.teacher? %>
+  <div id="non-billable-bb" class="disabled">
     <%= render 'layouts/non_billable_bookings' %>
   </div>
+  <% end %>
 </div>
  

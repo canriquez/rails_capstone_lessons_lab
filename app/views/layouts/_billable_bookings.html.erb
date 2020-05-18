@@ -1,9 +1,11 @@
+  <% if current_user.teacher? %>
   <div class="card">
     <div class="card-body">
       <span>Total Booked hours: <%= @transactions.sum(:minutes)/60 %></span> | 
       <span>Current Revenue: <%= @transactions.sum(:price) %> usd</span>
     </div>
   </div>
+  <% end %>
    <% @transactions.each do |booking| %>
   <div data-turbolinks="false" id="booking-<%= booking.id %>" class=" shadows course-card card mb-3 mt-3 ml-1" style="max-width: 38rem;">
     <div class="card-header bg-transparent">
@@ -30,13 +32,14 @@
     </div>
     <div class="card-footer bg-transparent d-flex justify-content-end">
 
+      <% if current_user.teacher? %>
         <button type="button" class="shadows icon-btn btn">
 
         <%= link_to confirm_destroy_transaction_path(booking), data: { remote: true }, class: "delete" do %>
           <%= svg('trash_can') %>
           <% end %>
         </button>
-
+      <% end %>
 
     </div>
   </div>
