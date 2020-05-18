@@ -102,7 +102,7 @@ $(document).on('turbolinks:load', function () {
     });
 
 
-    //Dynamic select box populator for enrolled students
+    //Dynamic select box populator for enrolled students Transaction#new view
 
     $(function () {
 
@@ -237,27 +237,24 @@ $(document).on('turbolinks:load', function () {
                 wait = false
             }
         }, 250));
-
-
-
-
     });
 
 
     //Disable/enable billable/non-billable option on Transaction new form
+    //Disables save booking if billable is enabled and 'course' or 'slect student' are not selected
 
     $(function () {
 
         //clean the enrolled student option on page load and touch (this is specially helpful if teacher change courses)
-        if ($("select#inputBillableGroup").val() == "1") {
+        if ($("select#transaction_booking_type").val() == "billable") {
             $("select#transaction_course_taught_id").prop("disabled", false);
             $("select#transaction_sitting_student_id").prop("disabled", false);
         }
 
-        $("select#inputBillableGroup").change(function () {
+        $("select#transaction_booking_type").change(function () {
             var id_value_string = $(this).val();
             console.log('id_value_string_is :' + id_value_string)
-            if (id_value_string == "2") {
+            if (id_value_string == "non-billable") {
                 $("select#transaction_course_taught_id").prop("disabled", true);
                 $("select#transaction_sitting_student_id").prop("disabled", true);
             } else {

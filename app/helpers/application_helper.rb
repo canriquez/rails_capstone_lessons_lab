@@ -2,8 +2,13 @@ module ApplicationHelper
   require 'date'
   def roles_options
     rt = User.roles.map { |k, _v| [k.split('_').first.capitalize, k] }
-    # puts "look here"
-    # p rt
+
+    rt
+  end
+
+  def type_options
+    rt = Transaction.booking_types.map { |k, _v| [k.split('_').first.capitalize, k] }
+
     rt
   end
 

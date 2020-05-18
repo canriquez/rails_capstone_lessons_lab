@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_05_13_133240) do
   create_table "transactions", force: :cascade do |t|
     t.integer "teacher_id"
     t.integer "status"
+    t.integer "booking_type"
     t.integer "minutes"
     t.date "accdate"
     t.integer "sitting_student_id"

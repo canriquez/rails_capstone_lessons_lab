@@ -1,16 +1,8 @@
-<div class="input-group mb-3">
-  <div class="input-group-prepend">
-    <label class="input-group-text" for="inputGroupSelect01">Options for this session bookin</label>
-  </div>
-  <select class="custom-select" id="inputBillableGroup">
-    <option selected value="1">Billable</option>
-    <option value="2">non-Billable</option>
-  </select>
-</div>
 <%= simple_form_for  @transaction do |f| %>
+    <%= f.input :booking_type, collection: Hash[type_options], label: "Options for this session's booking", class: "custom-select"%> 
     <%= f.input :course_taught_id, collection: Hash[auth_course_options], label: "Select Course" %> 
     <%= f.input :sitting_student_id, collection: [ ' ' ],label: "Select Student" %>
     <%= f.input :minutes, label: "Session Duration (min)"%>
 
-    <%= f.submit 'Save Booking', class: 'btn btn-primary', data: { "disable-with": "Saving..." } %>
+    <%= f.submit 'Save Booking', class: 'btn btn-primary', data: { "disable-with": "Saving..." }, id: "save-booking-new" %>
 <% end %>
