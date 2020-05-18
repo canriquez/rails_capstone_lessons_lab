@@ -22,8 +22,8 @@ class TransactionsController < ApplicationController
   def create
     @transaction = Transaction.new(transaction_params)
     @transaction.teacher_id = current_user.id
-    @transaction.valid?
     @transaction.status = :generated
+    
     puts 'LOOK HERE ON TRANSACTION CREATE'
     p @transaction.errors.full_messages
     p @transaction

@@ -12,9 +12,6 @@ class User < ApplicationRecord
 
   enum role: %i[student teacher]
 
-
- 
-
   def enrolled(course)
     enrolled_courses.where(course_id: course).count.positive?
   end

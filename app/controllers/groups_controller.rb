@@ -72,11 +72,11 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     return if current_user == @group.author || Enroll.already_enrolled(current_user, @group)
 
-    redirect_to groups_path, notice: "you are not authorised for this action #{current_user.id}, #{@group.author}, #{current_user.enrolled(@group)}"
+    redirect_to groups_path, notice: "you are not authorised for this action"
   end
 
   def teachers_only
-    return if current_user.role != 'student'
+    return if current_user.teacher?
 
     puts 'WARNING TEACHERS ONLY FAILED'
     redirect_to groups_path, notice: 'you are not authorised for this action'

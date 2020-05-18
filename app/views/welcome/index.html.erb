@@ -6,7 +6,8 @@
       <span class="d-flex align-items-center badge badge-warning"><%= current_user.role %></span>
     </li>
     <li class="list-group-item d-flex justify-content-between align-items-center">
-      Bookings
+    <%= current_user.teacher? ? 'Manage My Bookings' : 'My Booked Lessons' %>
+ 
       <button value="edit" name="edit" type="button" class=" main-link-icon">
           <%= link_to transactions_path do %>
             <%= svg('bookings') %>
@@ -14,17 +15,19 @@
           </button>
     </li>
     <li class="list-group-item d-flex justify-content-between align-items-center">
-    All Courses
+    <%= current_user.teacher? ? 'Manage My Courses' : 'My Enrolled Courses' %>
       <button value="edit" name="edit" type="button" class=" main-link-icon">
           <%= link_to groups_path do %>
             <%= svg('courses') %>
             <% end %>
           </button>
     </li>
+    <% if current_user.teacher? %>
     <li class="list-group-item d-flex justify-content-between align-items-center">
       All Students
       <span class="badge badge-primary badge-pill">1</span>
     </li>
+    <% end %>
   </ul>
   </div>
 </div>
