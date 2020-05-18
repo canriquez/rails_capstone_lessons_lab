@@ -1,20 +1,19 @@
 class EnrolledController < ApplicationController
-  def enrolled
-    @enrolled = User.select('users.name as name, users.id as id')
-      .joins(:enrolled_courses)
-      .where(id: Group.find(enrolled_params[:id]).enrollments).to_a
-    p @enrolled
 
+  #used to populate the 'select student' selector in transactions#new view
+  def enrolled
+    @enrolled = User.enrolled_list(enrolled_params[:id])
+    p @enrolled
     respond_to do |format|
       format.json { render json: @enrolled }
     end
   end
 
+  #used to populate the 'student to enroll' selector in group index view.
   def enrolar
-    @to_enroll = User.select('users.id, users.name')
-      .where.not(id: Enroll.select('student_id as id')
-    .joins(:student).where(course: Group.find(enrolled_params[:id]).enrollments)).to_a
+    @to_enroll = User.to_enroll(Group.find(enrolled_params[:id]))
 
+    puts ('AVAILABLE STUDENTS TO ENROLL: ')
     p @to_enroll
     respond_to do |format|
       format.json { render json: @to_enroll }

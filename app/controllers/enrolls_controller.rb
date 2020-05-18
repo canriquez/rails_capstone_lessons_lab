@@ -44,8 +44,9 @@ class EnrollsController < ApplicationController
   end
 
   def rejects_duplications
+    puts "DUPLICATION CHECK. Existing enrollments for student_id[#{params[:student_id]}] => #{Enroll.already_enrolled(params[:student_id], params[:course_id])}"
     return if Enroll.already_enrolled(params[:student_id], params[:course_id]) == 0
-    redirect_to groups_path
+    redirect_to groups_path, notice: 'there was an error with the enrollment, please try again'
   end
 
 end

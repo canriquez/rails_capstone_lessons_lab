@@ -2,6 +2,7 @@ class Group < ApplicationRecord
   belongs_to :author, class_name: 'User'
   has_many :enrollments, foreign_key: 'course_id', class_name: 'Enroll'
   has_many :booked_sessions, foreign_key: 'course_taught_id', class_name: 'Transaction'
+  has_many :enrolled, through: :enrollments, source: :student
 
   validates :name, presence: true,
                    length: { maximum: 50 }

@@ -155,8 +155,9 @@ $(document).on('turbolinks:load', function () {
         var wait = false;
         var x = 0
         // Populates selector to add new enrolled student to course (not previously enrolled in that course)
-        $(document).on('click', debounce(function (event) {
-            console.log("click detected")
+
+        $('.enroll').on('click', debounce(function (event) {
+            console.log(" .enroll click detected")
             console.log('Yep, finding the click' + $(event.currentTarget))
 
             if ($(event.target).hasClass('enroll') && $(event.target).not('.working') && !wait) {
@@ -197,18 +198,18 @@ $(document).on('turbolinks:load', function () {
                 //$(event.target).removeClass('working');
                 console.log('un-bloquing selector - we can choose again now')
             }
-        }, 500));
+        }, 250));
 
         // Catched the add student button and fires up the PUT update enrolls action 
 
-        $(document).on('click', debounce(function (event) {
+        $('.add-student').on('click', debounce(function (event) {
             console.log("click on add button detected")
 
             if ($(event.target).hasClass('add-student') && $(event.target).not('.working') && !wait) {
                 //$(event.target).addClass('working');
                 var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
                 $(event.target).addClass('working');
-                alert('id : ' + event.target.id + ' has .working ? : ' + $(event.target).hasClass('working'))
+                //alert('id : ' + event.target.id + ' has .working ? : ' + $(event.target).hasClass('working'))
                 console.log('we click on a ADD student  - selector :' + id_value_string)
 
                 console.log("student_id :" + $("select#abc-" + id_value_string).val());
@@ -235,7 +236,7 @@ $(document).on('turbolinks:load', function () {
                 console.log('Not catching the class add-student')
                 wait = false
             }
-        }, 800));
+        }, 250));
 
 
 
