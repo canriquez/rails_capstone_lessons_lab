@@ -7,4 +7,13 @@ class Transaction < ApplicationRecord
 
   scope :order_by_most_recent, -> { order(created_at: :desc) }
   scope :not_billable, -> { where(course_taught_id: [nil, '']) }
+
+  def self.billable(current_user)
+      Transaction.select("transactions.id, transactions.created_at as date,
+      users.name as student_name, groups.name as course_name,
+      transactions.minutes as minutes, groups.price as price,
+      transactions.status as status, transactions.accdate as accepted_date")
+      .joins(:sitting_student, :course_taught)
+      .where(teacher_id: current_user).order_by_most_recent
+  end
 end

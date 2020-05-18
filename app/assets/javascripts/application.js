@@ -79,7 +79,7 @@ $(document).on('turbolinks:load', function () {
 
     $(function () {
         $('.sw').on('click', function (event) {
-            console.log('Yep, finding the click' + $(event.target))
+            console.log('Yep, finding the click. Handling: enable/disable course' + $(event.target))
             if ($(event.currentTarget).hasClass('course-on-btn')) {
                 var id = (this.id).substring(3, ((this.id).length))
                 var is_enabled = false;
@@ -152,12 +152,18 @@ $(document).on('turbolinks:load', function () {
     //************* Dynamic select box populator for not_enrolled in students ***********
 
     $(document).ready(function () {
+        var wait = false;
+        var x = 0
         // Populates selector to add new enrolled student to course (not previously enrolled in that course)
-        $(document).on('click', function (event) {
+        $(document).on('click', debounce(function (event) {
             console.log("click detected")
             console.log('Yep, finding the click' + $(event.currentTarget))
 
-            if ($(event.target).hasClass('enroll')) {
+            if ($(event.target).hasClass('enroll') && $(event.target).not('.working') && !wait) {
+                $(event.target).addClass('working');
+                x += 1
+                console.log('clicks :' + x)
+                console.log('bloquing selector - we are now Working')
                 var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
                 console.log('we click on a enroll - selector :' + id_value_string)
 
@@ -188,17 +194,21 @@ $(document).on('turbolinks:load', function () {
                 });
             } else {
                 console.log('Not catching the class enroll')
+                //$(event.target).removeClass('working');
+                console.log('un-bloquing selector - we can choose again now')
             }
-        });
+        }, 500));
 
         // Catched the add student button and fires up the PUT update enrolls action 
 
-        $(document).on('click', function (event) {
+        $(document).on('click', debounce(function (event) {
             console.log("click on add button detected")
 
-            if ($(event.target).hasClass('add-student') && $(event.target).not('.working')) {
-                $(event.target).addClass('working');
+            if ($(event.target).hasClass('add-student') && $(event.target).not('.working') && !wait) {
+                //$(event.target).addClass('working');
                 var id_value_string = (event.target.id).substring(4, ((event.target.id).length))
+                $(event.target).addClass('working');
+                alert('id : ' + event.target.id + ' has .working ? : ' + $(event.target).hasClass('working'))
                 console.log('we click on a ADD student  - selector :' + id_value_string)
 
                 console.log("student_id :" + $("select#abc-" + id_value_string).val());
@@ -208,23 +218,24 @@ $(document).on('turbolinks:load', function () {
 
                     // Send the request and update course dropdown
                     Rails.ajax({
-                        url: '/enrolls/' + id_value_string,
-                        type: "PATCH",
+                        url: '/enrolls',
+                        type: "POST",
                         data: 'student_id=' + student_id + '&course_id=' + id_value_string,
                         error: function (XMLHttpRequest, errorTextStatus, error) {
                             alert("Failed to submit : " + errorTextStatus + " ;" + error + "value string :" + id_value_string);
                         },
                         success: function (data) {
                             console.log('We successfully recorded enrolled :' + student_id + ':' + id_value_string)
-                            $(event.target).removeClass('working');
+                            //$(event.target).removeClass('working');
 
                         }
                     });
                 };
             } else {
                 console.log('Not catching the class add-student')
+                wait = false
             }
-        });
+        }, 800));
 
 
 
@@ -259,3 +270,18 @@ $(document).on('turbolinks:load', function () {
     });
 
 });
+
+function debounce(func, wait, immediate) {
+    var timeout;
+    return function () {
+        var context = this, args = arguments;
+        var later = function () {
+            timeout = null;
+            if (!immediate) func.apply(context, args);
+        };
+        var callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func.apply(context, args);
+    };
+};

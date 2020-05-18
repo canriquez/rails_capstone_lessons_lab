@@ -206,6 +206,16 @@ body {
     }
 }
 
+.confirmation-svg {
+    padding: 1px 6px;
+    width: 25%;
+
+    svg {
+        fill: $second;
+        margin-top: 6px;
+    }
+}
+
 .main-link-icon {
     padding: 1px 6px;
 
@@ -303,3 +313,7 @@ body {
         align-items: center;
     }
 }
+
+//***************************************
+//**      enrolls approval         ***
+//***************************************

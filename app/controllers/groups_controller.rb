@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: %i[index show new create edit update destroy]
+ # before_action :authenticate_user!, only: %i[index show new create edit update destroy]
   before_action :authors_only, only: %i[edit update destroy confirm_destroy]
   before_action :authors_or_enrolled_only, only: [:show]
   before_action :teachers_only, only: %i[new create]
