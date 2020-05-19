@@ -40,7 +40,6 @@ RSpec.describe Group, type: :model do
     end
   end
 
-  
   describe 'testing association ' do
     it { should belong_to(:author) } #against User
     it { should have_many(:booked_sessions) } #against Transaction
@@ -48,17 +47,19 @@ RSpec.describe Group, type: :model do
     it { should have_many(:enrollments) } #against Enroll
   end
 
-  describe 'testing instance methods' do
+  describe 'testing instance scopes' do
 
-    it 'it provides the list of users role: teacher' do
-      t1 = FactoryBot.create(:teacher_user) 
-      total = User.teacher.to_a
+    it 'it provides the list enabled courses' do
+      t1 = FactoryBot.create(:teacher_user)
+      c1 = FactoryBot.create(:group_enabled, author: t1) 
+      total = Group.enabled.to_a
       expect(total.count).to eq(1)
     end
 
-    it 'it provides the list of users role: student' do
-      t1 = FactoryBot.create(:student_user) 
-      total = User.teacher.to_a
+    it 'it provides the list enabled courses' do
+      t1 = FactoryBot.create(:teacher_user)
+      c1 = FactoryBot.create(:group_disabled, author: t1) 
+      total = Group.enabled.to_a
       expect(total.count).to_not eq(1)
     end
 
@@ -79,12 +80,5 @@ RSpec.describe Group, type: :model do
       total = Group.authored_courses(t1).to_a
       expect(total.count).to eq(1)
     end
-
-
-
-
-
   end
-
-
 end

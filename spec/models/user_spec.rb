@@ -69,7 +69,19 @@ RSpec.describe User, type: :model do
         it { should have_many(:my_courses) }    #against Transactions
     end
 
-    describe 'testing model instance methods' do
+    describe 'testing model instance enum and  methods ' do
+
+        it 'it provides the list of users role: teacher' do
+            t1 = FactoryBot.create(:teacher_user) 
+            total = User.teacher.to_a
+            expect(total.count).to eq(1)
+          end
+      
+          it 'it provides the list of users role: student' do
+            t1 = FactoryBot.create(:student_user) 
+            total = User.teacher.to_a
+            expect(total.count).to_not eq(1)
+          end
 
         it 'capitlizes names before saving' do
             t1 = FactoryBot.create(:teacher_user, name: 'pedro')
