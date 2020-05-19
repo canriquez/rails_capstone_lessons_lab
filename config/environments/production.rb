@@ -98,14 +98,14 @@ Rails.application.configure do
   config.assets.css_compressor = :scss
 
   #Fix to enable img usage @ heroku
-  config.assets.compile = true
+  config.assets.compile = false
   config.assets.digest = true
 
   #adding svg icons font into the assets pipeline (for Heroku)
   config.assets.paths << Rails.root.join('assets', 'images','icons')
 
   #Precompile additional assets (for heroku)
-  config.assets.precompile += %w( .svg .eot .woff .ttf )
+  #config.assets.precompile += %w( .svg .eot .woff .ttf )
 
 
 end

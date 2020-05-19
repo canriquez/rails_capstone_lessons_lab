@@ -30,8 +30,8 @@ module ApplicationHelper
 
     fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
     return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
-
     '(not found)'
+    
   end
 
   def toggle_icon(value)
