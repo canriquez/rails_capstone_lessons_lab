@@ -36,7 +36,7 @@ module RailsCapstoneLessonsLab
     config.assets.paths << Rails.root.join("app","assets","fonts")
     
     #adding svg icons font into the assets pipeline (for Heroku)
-    config.assets.paths << Rails.root.join('assets', 'images','icons')
+    config.assets.paths << Rails.root.join('assets','images','icons')
 
     #Precompile additional assets (for heroku)
     config.assets.precompile += %w( .svg .eot .woff .ttf .png .jpg .gif )

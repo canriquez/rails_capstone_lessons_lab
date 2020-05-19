@@ -10,7 +10,7 @@
  
       <button value="edit" name="edit" type="button" class=" main-link-icon">
           <%= link_to transactions_path do %>
-            <%= my_bookings_icon %>
+            <%= svg('bookings') %>
             <% end %>
           </button>
     </li>
@@ -25,7 +25,11 @@
     <% if current_user.teacher? %>
     <li class="list-group-item d-flex justify-content-between align-items-center">
       All Students
-      <span class="badge badge-primary badge-pill">1</span>
+      <button value="edit" name="edit" type="button" class=" main-link-icon">
+      <%= link_to groups_path do %>
+            <%= svg('students') %>
+            <% end %>
+          </button>
     </li>
     <% end %>
   </ul>
