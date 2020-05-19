@@ -34,7 +34,8 @@ module ApplicationHelper
   end
 
   def svgb(name)
-    File.open("#{Rails.root}/app/assets/images/icons/#{name}.svg", "rb") do |file|
+    #File.open("#{Rails.root}/app/assets/images/icons/#{name}.svg", "rb") do |file|
+    File.open(Rails.root + ActionController::Base.helpers.asset_path("#{name}.svg")) do |file|      
       raw file.read
     end
   end
