@@ -26,12 +26,12 @@ module ApplicationHelper
 
   def svg(name)
     file_path = "#{Rails.root}/app/assets/images/icons/#{name}.svg"
-    return File.read(file_path).html_safe if File.exist?(file_path)
+    #return File.read(file_path).html_safe if File.exist?(file_path)
 
-    fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
-    return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
-    '(not found)'
-    
+    #fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
+    #return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
+    #'(not found)'
+    File.read(file_path).html_safe
   end
 
   def toggle_icon(value)
@@ -39,8 +39,6 @@ module ApplicationHelper
   end
 
   def to_date(record)
-    #parsed_time = DateTime.strptime(record.to_s[0..18], '%Y/%m/%d %H:%M:%S')
-    #parsed_time.to_s
     record.to_s[0..18]
     
   end
@@ -76,6 +74,10 @@ module ApplicationHelper
     1.723h-13.012v-16h14v7.894c.646-.342 1.348-.274 1.877.101l.123-.018v-8.477c0-.828-.672-1.5-1.5-1.5h-15c-.828 
     0-1.5.671-1.5 1.5v17c0 .829.672 1.5 1.5 1.5h13.974c-.245-.515-.425-1.124-.462-2z"/>
     </svg>'.html_safe
+  end
+
+  def my_enrolled_courses
+    ''.html_safe
   end
 
 
