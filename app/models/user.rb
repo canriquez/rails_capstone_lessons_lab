@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  before_save :capitalize_name
   has_many :authored_courses, foreign_key: 'author_id', class_name: 'Group'
   has_many :enrolled_courses, foreign_key: 'student_id', class_name: 'Enroll'
   has_many :taught_sessions, foreign_key: 'teacher_id', class_name: 'Transaction'
@@ -24,5 +25,11 @@ class User < ApplicationRecord
     User.select('users.name as name, users.id as id').
       where(id: Group.select("enrolls.student_id as id").
       joins(:enrolled).where(id: course))
+  end
+
+  private
+
+  def capitalize_name
+    self.name = name.capitalize
   end
 end
