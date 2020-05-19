@@ -31,7 +31,8 @@ module ApplicationHelper
     #fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
     #return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
     #'(not found)'
-    File.read(file_path).html_safe
+    #File.read(file_path).html_safe
+    File.read(name).html_safe
   end
 
   def toggle_icon(value)
