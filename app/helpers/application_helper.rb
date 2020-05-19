@@ -26,13 +26,17 @@ module ApplicationHelper
 
   def svg(name)
     file_path = "#{Rails.root}/app/assets/images/icons/#{name}.svg"
-    #return File.read(file_path).html_safe if File.exist?(file_path)
+    return File.read(file_path).html_safe if File.exist?(file_path)
 
-    #fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
-    #return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
-    #'(not found)'
-    #File.read(file_path).html_safe
-    File.read("app/assets/images/icons/#{name}.svg").html_safe
+    fallback_path = "#{Rails.root}/app/assets/images/icons/#{name}.png"
+    return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
+    '(not found)'
+  end
+
+  def svgb(name)
+    File.open("app/assets/images/icons/#{name}.svg", "rb") do |file|
+      raw file.read
+    end
   end
 
   def toggle_icon(value)

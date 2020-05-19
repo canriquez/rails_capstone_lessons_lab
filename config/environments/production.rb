@@ -107,5 +107,4 @@ Rails.application.configure do
   #Precompile additional assets (for heroku)
   config.assets.precompile += %w( .svg .eot .woff .ttf )
 
-
 end
