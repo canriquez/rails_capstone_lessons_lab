@@ -8,12 +8,11 @@ class Transaction < ApplicationRecord
   enum booking_type: %i[billable non-billable]
 
   scope :order_by_most_recent, -> { order(created_at: :desc) }
-  scope :not_billable, -> { where(course_taught_id: [nil, '']) }
+  scope :not_billable, -> { where(booking_type: 1 )}
 
   validates :booking_type, presence: true
   validate :billable_course
   validate :billable_student
-  #validates :billable_student
   validates :minutes , presence: true, numericality: true
 
 

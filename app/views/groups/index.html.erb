@@ -6,7 +6,7 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li class="nav-item">
-        <a id="enabled-tab"  data-turbolinks="false" class="nav-link active" href="">Active Courses (<span class="ena-course"><%= @group.enabled.count %></span>)</a>
+        <a id="enabled-tab"  data-turbolinks="false" class="nav-link active" href="">Active Courses (<span class="ena-course" id="test-course"><%= @group.enabled.count %></span>)</a>
       </li>
       <% if current_user.teacher? %>
       <li class="nav-item">
