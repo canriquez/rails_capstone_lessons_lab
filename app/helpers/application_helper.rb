@@ -32,7 +32,7 @@ module ApplicationHelper
     #return image_tag("icons/#{name}.png") if File.exist?(fallback_path)
     #'(not found)'
     #File.read(file_path).html_safe
-    File.read(name).html_safe
+    File.read("app/assets/images/icons/#{name}.svg").html_safe
   end
 
   def toggle_icon(value)
