@@ -42,6 +42,7 @@ group :test do
   gem 'capybara', '~> 3.32', '>= 3.32.1'
   gem 'database_cleaner'
   gem 'rails-controller-testing'
+  gem 'shoulda-matchers', require: false
 end
 
 group :production do

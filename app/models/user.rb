@@ -13,12 +13,19 @@ class User < ApplicationRecord
 
   enum role: %i[student teacher]
 
+  validates :name, presence: true,
+                   length: { maximum: 50 }
+
+  validates :role, presence: true,
+                   length: { maximum: 50 }
+
+
   def enrolled(course)
     enrolled_courses.where(course_id: course).count.positive?
   end
 
   def self.to_enroll(course)
-    User.select("users.id as id, users.name as name").where.not(id: course.enrolled)
+    User.student.select("users.id as id, users.name as name").where.not(id: course.enrolled)
   end
 
   def self.enrolled_list(course)
