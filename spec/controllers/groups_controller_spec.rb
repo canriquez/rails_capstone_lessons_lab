@@ -14,7 +14,7 @@ describe GroupsController do
       sign_in(student_1)
     end
 
-    describe 'GET course index list where student is enrolled' do
+    describe 'GET course index list' do
       it 'renders :index template' do
         get :index
         expect(response).to render_template(:index)
@@ -24,7 +24,7 @@ describe GroupsController do
         FactoryBot.create(:enroll, student: student_1, course: course_1)
 
         get :index
-        expect(assigns(:student_courses)).to match_array([course_1])
+        expect(assigns(:group)).to match_array([course_1])
       end
     end
 

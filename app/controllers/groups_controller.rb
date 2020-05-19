@@ -7,9 +7,7 @@ class GroupsController < ApplicationController
   def index
     if current_user.teacher?
       @group = current_user.authored_courses.distinct(:course_id)
-      #@group = Group.authored_courses(current_user)
     else
-      #@group = Group.enrolled_courses(current_user)
       @group = current_user.my_courses.distinct(:course_id)
     end
   end
