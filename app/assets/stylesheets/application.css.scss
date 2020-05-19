@@ -47,6 +47,7 @@ $icons_on: #5fb523;
 body {
     background: $main;
     font-family: ProximaReg;
+    height: 80vh;
 
 }
 
@@ -111,30 +112,40 @@ body {
 //**       NAVBAR         ***
 //***************************
 
+.nav-wrap {
+    display: block;
+    height: 10vh;
+    margin-top: 5%
+}
+
 .app-navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
-    font-family: Montserrat;
-    font-size: 1.5em;
-    height: 60px;
+    height: 20%;
     background: $main;
     color: #fff;
     position: relative;
 
     a {
+        font-family: ProximaReg;
         text-decoration: none;
         color: white;
     }
 
+    .nav-item {
+        font-size: 3rem
+    }
 
-    #app-title {
+
+    .app-title {
         color: #fff !important;
+        flex-basis: 80%;
         text-decoration: none;
         font-family: ProximaBold;
         font-weight: 600;
-        font-size: 2em;
+        font-size: 5.0rem;
         position: absolute;
         top: 50%;
         left: 50%;
@@ -151,13 +162,13 @@ body {
 // Burger icon
 
 .header-burger {
-    width: 60px;
+    width: 15%;
     cursor: pointer;
 }
 
 .header-burger>span {
-    margin-top: 6px;
-    margin-bottom: 6px;
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 
 .header-burger>span,
@@ -165,8 +176,8 @@ body {
 .header-burger::after {
     content: "";
     display: block;
-    width: 30px;
-    height: 3px;
+    width: 50%;
+    height: 10px;
     background-color: #FFF;
     margin-left: auto;
     margin-right: auto;

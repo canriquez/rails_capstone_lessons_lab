@@ -1,20 +1,19 @@
-<div class="app-navbar">
-        <span class="header-burger">
-            <span></span>
-        </span>
-        
-        <div id="app-title"><%= link_to 'Lessons Lab', root_path, class: 'app-title' %></div>
-         <div class="d-flex justify-content-end">
-            <% if current_user %>
-               <span class="mr-3 user-name d-flex align-items-center p-0"><%= current_user.name %></span>
-                <span class="small-text d-flex align-items-center badge badge-warning"><%= current_user.role %></span>
-                
-                <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: "pt-2 pb-2 ml-3 small-text btn btn-light", id: "sign-out-button" %>
-            <% else %>
-                <%= link_to 'Sign In', new_user_session_path, class: "nav-item nav-link" %>
-            <% end %>
-        </div>
-</div>
-<div>
-              
+<div class="nav-wrap">
+    <div class="app-navbar">
+            <span class="header-burger">
+                <span></span>
+            </span>
+            
+            <div id="app-title"><%= link_to 'Lessons Lab', root_path, class: 'app-title' %></div>
+            <div class="d-flex justify-content-end">
+                <% if current_user %>
+                <span class="mr-3 user-name d-flex align-items-center p-0"><%= current_user.name %></span>
+                    <span class="small-text d-flex align-items-center badge badge-warning"><%= current_user.role %></span>
+                    
+                    <%= link_to 'Sign Out', destroy_user_session_path, method: 'delete', class: "pt-2 pb-2 ml-3 small-text btn btn-light", id: "sign-out-button" %>
+                <% else %>
+                    <%= link_to 'Sign In', new_user_session_path, class: "nav-item nav-link" %>
+                <% end %>
+            </div>
+    </div>
 </div>
