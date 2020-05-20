@@ -1,0 +1,50 @@
+  <div class="couse_name card border-light mb-0" style="max-width: 28rem;">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <span>Course Name</span>
+        <button value="view" name="view" type="button" class="view shadows icon-btn btn">
+         <%= link_to groups_path do %>
+          <%= svg('back') %>
+          <% end %>
+        </button>
+    </div>
+      <div class="card-body">
+        <h5 class="card-title mb-0"><%= @group.name %></h5>
+      </div>
+    </div>
+    <div class="course-description card border-light mb-0" style="max-width: 28rem;">
+      <div class="card-header">Description</div>
+      <div class="card-body">
+        <p class="card-text"><%= @group.description %></p>
+      </div>
+    </div>
+    <div class="course-session card border-light mb-0" style="max-width: 28rem;">
+      <div class="card-header">Session Information</div>
+      <ul class="list-group">
+        <li class=" pt-2 pb-2 list-group-item d-flex flex-row justify-content-between">
+        Session duration <span class="border border-info rounded pl-2 pr-2">
+        <%= @group.duration %> min</span>
+        </li>
+        <li class=" pt-2 pb-2 list-group-item d-flex flex-row justify-content-between">
+        Session price <span class="border border-info rounded pl-2 pr-2">
+        <%= @group.price %> usd</span>
+        </li>
+      </ul>
+    </div>
+    <div class="course-delivery card border-light mb-0" style="max-width: 28rem;">
+      <div class="card-header">Delivery Information</div>
+      <ul class="list-group">
+        <li class=" shadow list-group-item d-flex flex-row justify-content-between">
+        Online Session <span class=" pl-2 pr-2 toggle">
+        <%= toggle_icon(@group.online) %></span>
+        </li>
+        <li class=" shadow list-group-item d-flex flex-row justify-content-between">
+        Presencial Session <span class="  pl-2 pr-2 toggle">
+        <%= toggle_icon(@group.presencial)%></span>
+        </li>
+        <li class=" shadow list-group-item d-flex flex-row justify-content-between">
+        Course enabled <span class= "pl-2 pr-2 toggle">
+        <%= toggle_icon(@group.enabled)%></span>
+        </li>
+      </ul>
+    </div>
+  </div>  

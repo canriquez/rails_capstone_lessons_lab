@@ -1,0 +1,33 @@
+
+<div class="menu d-flex justify-content-between">
+<%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-primary" unless current_user.student? %>
+<%= link_to 'Back to Home', root_path, class: "btn btn-warning" %>
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+    <li class="nav-item">
+        <a id="enabled-tab"  data-turbolinks="false" 
+        class="nav-link active" 
+        href="">Total Billable Bookings (<span class="ena-course"><%= @transactions.count(:id) %></span>)</a>
+      </li>
+      <% if current_user.teacher? %>
+      <li class="nav-item">
+        <a id="disabled-tab"  data-turbolinks="false" 
+        class="nav-link" 
+        href="">Total non-Billable Bookings (<span class="dis-course"><%= @tran_not_billable.not_billable.count(:id) %></span>)</a>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+  <div id="billable-bb" class="enabled">
+    <%= render 'layouts/billable_bookings' %>
+  </div>
+  <% if current_user.teacher? %>
+  <div id="non-billable-bb" class="disabled">
+    <%= render 'layouts/non_billable_bookings' %>
+  </div>
+  <% end %>
+</div>
+ 
