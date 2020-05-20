@@ -1,0 +1,19 @@
+<div class="d-flex align-items-center flex-column">
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center">Book a new lesson session</h5>
+
+        <%= simple_form_for  @transaction do |f| %>
+            <%= f.input :booking_type, collection: Hash[type_options], label: "Options for this session's booking", class: "custom-select"%> 
+            <%= f.input :course_taught_id, collection: Hash[auth_course_options], label: "Select Course" %> 
+            <%= f.input :sitting_student_id, collection: [ ' ' ],label: "Select Student" %>
+            <%= f.input :minutes, label: "Session Duration (min)"%>
+            <div class="menu-low d-flex justify-content-between">
+            <%= f.submit 'Save Booking', class: 'btn btn-primary', data: { "disable-with": "Saving..." }, id: "save-booking-new" %>
+            <%= link_to 'Cancell-Back to bookings', transactions_path, class: "btn btn-light" %>
+            </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>
