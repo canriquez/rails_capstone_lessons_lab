@@ -3,7 +3,7 @@ class TransactionsController < ApplicationController
 
   def index
     if current_user.role == 'teacher'
-      @transactions = Transaction.billable(current_user) 
+      @transactions = Transaction.billable(current_user)
       @tran_not_billable = Transaction.not_billable.order_by_most_recent
       p @tran_not_billable
     else
@@ -23,7 +23,7 @@ class TransactionsController < ApplicationController
     @transaction = Transaction.new(transaction_params)
     @transaction.teacher_id = current_user.id
     @transaction.status = :generated
-    
+
     puts 'LOOK HERE ON TRANSACTION CREATE'
     p @transaction.errors.full_messages
     p @transaction

@@ -1,14 +1,10 @@
 require 'rails_helper'
 
-# rubocop:disable Metrics/BlockLength,Layout/LineLength,Lint/UselessAssignment,Naming/VariableNumber
-
 describe EnrollsController do
-
   describe 'Teacher User' do
-
     context 'logged in and course owner' do
       describe 'POST enrolls (create)' do
-        #one teacher, one student, one course. Test: one enrollment.
+        # one teacher, one student, one course. Test: one enrollment.
         let(:t1) { FactoryBot.create(:teacher_user) }
         before do
           sign_in(t1)
@@ -32,9 +28,8 @@ describe EnrollsController do
     end
 
     context 'logged in not course owner' do
-
       describe 'POST enrolls create' do
-        #one teacher, one student, one course. Test: one enrollment.
+        # one teacher, one student, one course. Test: one enrollment.
         let(:t1) { FactoryBot.create(:teacher_user) }
         let(:t2) { FactoryBot.create(:teacher_user) }
 
@@ -60,21 +55,19 @@ describe EnrollsController do
 
       describe 'DELETE request to destroy a course enrollment'
     end
-
   end
 
   describe 'Student User' do
     context 'logged in not course owner' do
-
       describe 'POST enrolls create' do
-        #one teacher, one student, one course. Test: one enrollment.
+        # one teacher, one student, one course. Test: one enrollment.
         let(:t1) { FactoryBot.create(:teacher_user) }
         let(:s1) { FactoryBot.create(:student_user) }
 
         before do
           sign_in(s1)
         end
-      
+
         let(:c1) { FactoryBot.create(:group_enabled, author: t1) }
 
         it 'fails to enroll and redirect to course index page' do
@@ -90,9 +83,8 @@ describe EnrollsController do
           end.to change(Enroll, :count).by(0)
         end
       end
-
     end
   end
 end
 
-# rubocop:enable Metrics/BlockLength,Layout/LineLength,Lint/UselessAssignment,Naming/VariableNumber
+# rubocop:enable

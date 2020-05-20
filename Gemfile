@@ -1,3 +1,4 @@
+# rubocop:disable Bundler/DuplicatedGem
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -46,9 +47,11 @@ group :test do
 end
 
 group :production do
-  gem 'pg', '0.20.0'
   gem 'factory_bot_rails', '~> 5.2', require: false
   gem 'hirb'
+  gem 'pg', '0.20.0'
 end
 
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+
+# rubocop:enable Bundler/DuplicatedGem

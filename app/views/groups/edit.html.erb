@@ -10,5 +10,6 @@
     <%= f.input :enabled, label: "Enable Course" %>
     <%= f.input :starting, label: "Starting from" %>
     <%= f.input :cover_image, label: "Course Image", as: :file %>
-    <%= f.submit 'Update Course', class: 'btn btn-primary'%>
+    <%= f.submit 'Update Course', class: 'btn btn-primary update-test'%>
 <% end %>
+<%= content_tag :div, "edit-test", class: 'rspec_eyes_only' if Rails.env.test? %>

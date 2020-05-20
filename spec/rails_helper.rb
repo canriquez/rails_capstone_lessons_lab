@@ -47,6 +47,7 @@ RSpec.configure do |config|
   # You can uncomment this line to turn off ActiveRecord support entirely.
   # config.use_active_record = false
 
+  Capybara.javascript_driver = :webkit
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
   # `post` in specs under `spec/controllers`.
@@ -71,12 +72,14 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view
 
-  Shoulda::Matchers.configure do |config|
-    config.integrate do |with|
+  Shoulda::Matchers.configure do |conf|
+    conf.integrate do |with|
       with.test_framework :rspec
       with.library :rails
     end
   end
 
-
+  def wait_for_page_load(title)
+    find('div.rspec_eyes_only', text: title)
+  end
 end

@@ -19,19 +19,18 @@ class User < ApplicationRecord
   validates :role, presence: true,
                    length: { maximum: 50 }
 
-
   def enrolled(course)
     enrolled_courses.where(course_id: course).count.positive?
   end
 
   def self.to_enroll(course)
-    User.student.select("users.id as id, users.name as name").where.not(id: course.enrolled)
+    User.student.select('users.id as id, users.name as name').where.not(id: course.enrolled)
   end
 
   def self.enrolled_list(course)
-    User.select('users.name as name, users.id as id').
-      where(id: Group.select("enrolls.student_id as id").
-      joins(:enrolled).where(id: course))
+    User.select('users.name as name, users.id as id')
+      .where(id: Group.select('enrolls.student_id as id')
+      .joins(:enrolled).where(id: course))
   end
 
   private

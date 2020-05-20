@@ -1,9 +1,8 @@
 class EnrollsController < ApplicationController
-  before_action :authors_enroll_only, only: %i[ :show :create ]
-  before_action :rejects_duplications, only: [ :create ]
+  before_action :authors_enroll_only, only: %i[show create]
+  before_action :rejects_duplications, only: [:create]
 
   def create
-
     p enrolls_params
     @enroll = Enroll.new(enrolls_params)
 
@@ -26,8 +25,6 @@ class EnrollsController < ApplicationController
     @enroll = Enroll.find(params[:id])
   end
 
-
-
   private
 
   def enrolls_params
@@ -36,7 +33,6 @@ class EnrollsController < ApplicationController
     params.permit(:course_id, :student_id)
   end
 
-
   def authors_enroll_only
     @group = Group.find(params[:course_id])
     puts "Checking enroll author: #{current_user.name} vs course author: #{@group.author.name} "
@@ -44,9 +40,8 @@ class EnrollsController < ApplicationController
   end
 
   def rejects_duplications
-    puts "DUPLICATION CHECK. Existing enrollments for student_id[#{params[:student_id]}] => #{Enroll.already_enrolled(params[:student_id], params[:course_id])}"
-    return if Enroll.already_enrolled(params[:student_id], params[:course_id]) == 0
+    return if Enroll.already_enrolled(params[:student_id], params[:course_id]).zero?
+
     redirect_to groups_path, notice: 'there was an error with the enrollment, please try again'
   end
-
 end
