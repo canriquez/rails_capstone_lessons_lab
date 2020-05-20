@@ -15,7 +15,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # I will use bootstrap
-gem 'bootstrap', '~> 4.0.0'
+gem "bootstrap", ">= 4.3.1"
 gem 'devise'
 gem 'gravatar_image_tag', '~> 1.2'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.5'
