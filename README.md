@@ -83,6 +83,22 @@ For the demo, use the following pre-loaded users. You could also create new user
             iii. Role: student
         ```for simplification this feature is not implemented in the demo```
 
+## Technical design details
+
+- Below I include the fundamental ERD design and associations map to better understand the implemented solution.
+
+> ERD design
+
+![screenshot](erd.png)
+
+
+> Models Associations Map
+
+
+![screenshot](mam.png)
+
+
+
 ## Environment set up requirements
 
 To run this project, you need ruby installed in your environment
