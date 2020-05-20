@@ -11,6 +11,20 @@ This web application is a mobile application targeting freelance teachers to adm
 
 [heroku live site](https://shrouded-plains-92148.herokuapp.com/)
 
+For the demo, use the following pre-loaded users. You could also create new users. For all users password is: password
+
+| email            | name    | role    |   |   |
+|------------------|---------|---------|---|---|
+| email1@email.com | Sussane | teacher |   |   |
+| email2@email.com | Carlos  | teacher |   |   |
+| email3@email.com | Anna    | student |   |   |
+| email4@email.com | Clara   | student |   |   |
+| email5@email.com | Cecil   | student |   |   |
+| email6@email.com | Caro    | student |   |   |
+| email7@email.com | Matt    | student |   |   |
+| email8@email.com | Laureano| student |   |   |
+| email9@email.com | Robert  | student |   |   |
+
 ## Customer Story
 
     - The user logs in to the app, only by typing the email
@@ -20,7 +34,7 @@ This web application is a mobile application targeting freelance teachers to adm
         a. Bookings ("all my transactions")
             - Inside bookings two taps hell to show  
         b. All Course 
-        d. Additional feature: All students
+        d. Additional feature: All students '''not abailable in demo'''
 
     4. When a logged-in user opens "My billable bookings" page
         a. Total amount of booked minutes are displayed on top
@@ -50,18 +64,16 @@ This web application is a mobile application targeting freelance teachers to adm
     8. When a logged-in user opens "create a new course" or "Add new transaction" page
         a. A form with all necessary fields is displayed.
 
-    
         
-    9. At the end  extend your MVP app with one simple feature of your choice
-        a. Add feature: For create a new course, the following data should be provided
+    9. Add feature: For create a new course, the following key data should be provided (among others)
             i. Course name
             ii. Price per session
             iii. Session length
             
     10. Additional feature: Signing up students to courses:
-        a. Only a professor can enroll students in courses.
-        b. Sign-up student button is available only on the "course transactions page"
-        c. "add a new transaction" will be shown on the "course transaction page"
+        a. Only a professor and course author can enroll students in courses.
+        b. Enroll student button is available only on the "course index page"
+        c. "add a new transaction" shows on the "course transaction page"
             i. A transaction can be created only for students signed up into the Course.
             
     11. Additional features:Signup of students page
@@ -69,7 +81,7 @@ This web application is a mobile application targeting freelance teachers to adm
             i. Name
             ii. Email
             iii. Role: student
-Optionally: assign course
+        ```for simplification this feature is not implemented in the demo```
 
 ## Environment set up requirements
 
@@ -101,6 +113,12 @@ This action will install all the required dependencies.
 - Ruby
 - Ruby on Rails
 - bootstrap
+- Devise
+- RSpec
+- Capybara
+- FactoryBot
+- Shoulda-Matchers
+
 
 ## Authors
 
@@ -115,6 +133,13 @@ This action will install all the required dependencies.
 Contributions, issues and feature requests are welcome!
 
 Feel free to check the [issues page](issues/).
+
+## Acknowledgments
+
+- My Family (Oh man, after 70 hs in 9 days, definetley it has been a fundamental support)
+- The great TSE team for a fast review, key challenges and contributions: Addo, Simon and Issac. Thanks Guys!
+- @microverse / The Corgis
+
 
 ## Show your support
 
