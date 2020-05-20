@@ -1,5 +1,5 @@
 class EnrollsController < ApplicationController
-  before_action :authors_enroll_only, only: %i[show create]
+  before_action :authenticate_user!
   before_action :rejects_duplications, only: [:create]
 
   def create
@@ -31,12 +31,6 @@ class EnrollsController < ApplicationController
     puts 'Enrolled a new student, here are the params :'
     p params
     params.permit(:course_id, :student_id)
-  end
-
-  def authors_enroll_only
-    @group = Group.find(params[:course_id])
-    puts "Checking enroll author: #{current_user.name} vs course author: #{@group.author.name} "
-    redirect_to groups_path if current_user.id != @group.author.id
   end
 
   def rejects_duplications
