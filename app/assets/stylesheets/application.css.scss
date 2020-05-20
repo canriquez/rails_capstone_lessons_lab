@@ -114,7 +114,7 @@ body {
 
 .nav-wrap {
     display: block;
-    height: 10vh;
+    height: 5vh;
     margin-top: 5%
 }
 
@@ -184,6 +184,24 @@ body {
 }
 
 //***************************************
+//**       welcome page               ***
+//***************************************
+
+.user-avatar {
+    padding: 1px 6px;
+    text-aligment: center;
+
+    svg {
+        width: 60%;
+        fill: #ffc107;
+        margin-top: 6px;
+        z-index: 99;
+    }
+}
+
+
+
+//***************************************
 //**       COURSE CARDS INDEX         ***
 //***************************************
 
@@ -235,7 +253,6 @@ body {
     svg {
         fill: #fff;
         margin-top: 6px;
-        width: 100%
     }
 }
 

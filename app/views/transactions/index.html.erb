@@ -1,5 +1,8 @@
 
-<%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-btn-primary" unless current_user.student? %>
+<div class="menu d-flex justify-content-between">
+<%= link_to 'Add New Booking', new_transaction_path, class: "btn btn-primary" unless current_user.student? %>
+<%= link_to 'Back to Home', root_path, class: "btn btn-warning" %>
+</div>
 
 <div class="card">
   <div class="card-header">

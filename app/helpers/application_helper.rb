@@ -249,6 +249,17 @@ module ApplicationHelper
     </svg>'.html_safe
   end
 
+  def userl
+    '
+    <?xml version="1.0" encoding="utf-8"?>
+    <!-- Generator: Adobe Illustrator 24.1.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+       viewBox="0 0 640 480" style="enable-background:new 0 0 640 480;" xml:space="preserve">
+    <path d="M320.1,16c-294.3,5-294.3,442.8,0,447.8C614.4,458.8,614.4,21,320.1,16z M320.1,426.5c-58.3,0-110.3-26.9-144.6-68.8
+      c16.3-38.7,129.9-21,98.1-78.2c-127.5-224.8,219.4-228.3,92.9,0c-31,57.6,81.4,39.2,98.2,78.1C430.5,399.6,378.4,426.5,320.1,426.5z
+      "/><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g></svg>'.html_safe
+  end
+
   def wait_for_page_load(title)
     find('div.rspec_eyes_only', text: title)
   end

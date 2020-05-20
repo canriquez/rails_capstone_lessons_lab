@@ -1,12 +1,26 @@
-<%= simple_form_for  @group do |f| %>
-    <%= f.input :name, label: "Course Name"%>
-    <%= f.input :description, label: "Description"%>
-    <%= f.input :duration, collection: Hash[session_duration_options] %> 
-    <%= f.input :price, label: "Price" %>
-    <%= f.input :online, label: "Online Session" %>
-    <%= f.input :presencial, label: "Presencial Session" %>
-    <%= f.input :enabled, label: "Enable Course" %>
-    <%= f.input :starting, label: "Starting from" %>
-    <%= f.input :cover_image, label: "Course Image", as: :file %>
-    <%= f.submit 'Save Course', class: 'btn btn-primary', data: { "disable-with": "Saving..." } %>
-<% end %>
+
+<div class="d-flex align-items-center flex-column">
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title text-center">Create New Course</h5>
+
+        <%= simple_form_for  @group do |f| %>
+            <%= f.input :name, label: "Course Name"%>
+            <%= f.input :description, label: "Description"%>
+            <%= f.input :duration, collection: Hash[session_duration_options] %> 
+            <%= f.input :price, label: "Price" %>
+            <%= f.input :online, label: "Online Session" %>
+            <%= f.input :presencial, label: "Presencial Session" %>
+            <%= f.input :enabled, label: "Enable Course" %>
+            <%= f.input :starting, label: "Starting from" %>
+            <%= f.input :cover_image, label: "Course Image", as: :file %>
+
+            <div class="menu-low d-flex justify-content-between">
+              <%= f.submit 'Save Course', class: 'btn btn-primary', data: { "disable-with": "Saving..." } %>
+              <%= link_to 'Cancell-Back to Courses', groups_path, class: "btn btn-light" %>
+            </div>
+        <% end %>
+
+    </div>
+  </div>
+</div>

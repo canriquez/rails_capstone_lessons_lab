@@ -1,5 +1,7 @@
-<%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' unless current_user.student?%>
-<div class="capybara_wait"></div>
+<div class="menu d-flex justify-content-between">
+  <%= link_to 'Add New Course', new_group_path, class: 'btn btn-primary' unless current_user.student?%>
+  <%= link_to 'Back to Home', root_path, class: "btn btn-warning" %>
+</div>
 
 <%= puts "I AM HERE IN GROUPS#INDEX" %>
 <div class="card">
