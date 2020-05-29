@@ -69,6 +69,7 @@ class GroupsController < ApplicationController
   end
 
   def authors_or_enrolled_only
+    return unless params[:id].nil?
     @group = Group.find(params[:id])
     return if current_user == @group.author || Enroll.already_enrolled(current_user, @group)
 
